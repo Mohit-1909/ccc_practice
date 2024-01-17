@@ -38,9 +38,8 @@
 // echo trim($string);
 // Removes whitespace or other predefined characters from the beginning and end of a string.
 
-$glue = arr["Mohit"];
-$pieces = arr["Dodeja"];
-implode($glue, $pieces);
+// $glue = ['H', 'E'];
+// echo implode($glue);
 // Joins array elements with a string.
 
 // $string = "I love playing baskeball, chess and badminton.";
