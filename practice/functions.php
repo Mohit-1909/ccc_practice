@@ -1,6 +1,6 @@
 <?php
 
-// $string = 'Mohit Dodejaa';
+// $string = 'Mohit Dodeja';
 // echo strlen($string);
 // Returns the length of a string.
 
@@ -48,13 +48,14 @@
 // print_r (explode($delimiter, $string, $NoofDivisions));
 // Splits a string into an array by a specified delimiter.
 
-// htmlspecialchars($string):
+// $string = "I <b>love</b> playing baskeball, chess and badminton.";
+// echo htmlspecialchars($string);
 // Converts special characters to HTML entities.
 
-// htmlentities($string):
+// echo htmlentities($string);
 // Converts all applicable characters to HTML entities.
 
-// nl2br($string):
+// echo nl2br($string);
 // Inserts HTML line breaks before all newlines in a string.
 
 // $string = "I love playing baskeball, chess and badminton.";
@@ -97,19 +98,34 @@
 // echo strcoll($string1, $string2);
 // Locale based string comparison.
 
-// strcspn($string, $mask, $start, $length):
+// $string = "I love playing baskeball, chess and badminton.";
+// $mask = 'b';
+// $start = 0;
+// $length = 8;
+// echo strcspn($string, $mask, $start, $length);
 // Finds the length of the initial segment not matching a mask.
 
-// stristr($haystack, $needle, $before_needle):
+// $haystack = "I love playing baskeball, chess and badminton.";
+// $needle = "chess";
+// $before_needle = "I";
+// echo stristr($haystack, $needle, $before_needle);
 // Case-insensitive search for the first occurrence of a string.
 
-// strpbrk($string, $char_list):
+// $string = "I love playing baskeball, chess and badminton.";
+// $char_list = 'p';
+// echo strpbrk($string, $char_list);
 // Searches a string for any of a set of characters.
 
-// strstr($haystack, $needle, $before_needle):
+// $haystack = "I love playing baskeball, chess and badminton.";
+// $needle = "chess";
+// $before_needle = "I";
+// echo strstr($haystack, $needle, $before_needle);
 // Finds the first occurrence of a string.
 
-// strtr($string, $from, $to):
+// $string = " I love to play baseball";
+// $from = 'b';
+// $to =   'k';
+// echo strtr($string, $from, $to);
 // Translates characters or replaces substrings.
 
 // $string = "i love playing baskeball, chess and badminton.";
