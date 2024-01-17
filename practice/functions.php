@@ -1,6 +1,6 @@
 <?php
 
-// $string = 'Mohit Dodeja';
+// $string = 'Mohit Dodejaa';
 // echo strlen($string);
 // Returns the length of a string.
 
