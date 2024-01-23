@@ -1,25 +1,16 @@
-<!-- Implement the Bubble Sort algorithm to sort an array. (Do not use array sort function)
-    $arrayToSort = [64, 34, 25, 12, 22, 11, 90]; -->
+<!-- Write a PHP function to calculate the factorial of a given number. -->
 <?php
-function bubbleSort($arr){
-    $n = count($arr);
-    for ($i=0; $i<$n-1; $i++){
-        for ($j=$i+1; $j<$n; $j++){
-            if ($arr[$i] > $arr[$j]){
-                // Swap arr[i] and arr[j]
-                $temp = $arr[$i];
-                $arr[$i] = $arr[$j];
-                $arr[$j] = $temp;
-                }
-            }
+function factorial($num) {
+    if ($num < 0) return "Error! Factorial does not exist for negative numbers.";   //Factorial does not exist for negative numbers
+    else if ($num == 0) return 1;     //Factorial of zero is defined as 1
+    else {
+        $factorial = 1;
+        while ($num > 1) $factorial *= $num--;
+        return $factorial;
         }
-        return $arr;
-}
-$arrayToSort = [64, 34, 25, 12, 22, 11, 90];
-echo "Original Array: ";
-print_r($arrayToSort);
-echo "\n";
-$sortedArray = bubbleSort($arrayToSort);
-echo "Sorted Array: \n";
-print_r($sortedArray);
-?>                
+    }
+    // Calling the above function with different numbers and printing the results
+    $val = readline("Enter the number for the factorial: ");
+    
+    echo "The factorial of" . $val . " is: ".factorial($val). "\n";
+?>
