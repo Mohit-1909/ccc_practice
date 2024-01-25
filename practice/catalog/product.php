@@ -15,14 +15,14 @@ $product_updated_at = "";
 $button_text = 'submit';
 
 //Delete
-if(getPara('action') == 'delete' && getPara('product_id')){
+if (getPara('action') == 'delete' && getPara('product_id')) {
     $status = delete('ccc_products', ['product_id' => getPara('product_id')]);
-    if($status){
+    if ($status) {
         echo "<script>alert('Data deleted')</script>";
         echo "<script>location. href='product_list.php'</script>";
-    }else{
+    } else {
         echo "<script>alert('Data not deleted')</script>";
-        echo "<script>location. href='product_list.php'</script>";        
+        echo "<script>location. href='product_list.php'</script>";
     };
 };
 
@@ -128,7 +128,7 @@ if (getPara('update')) {
         <div>
             <label for="product_category">Category:</label>
             <select name="ccc_products[cat_id]" id="product_category">
-            <?php
+                <?php
                 if ($category->num_rows > 0) {
                     while ($row = $category->fetch_assoc()) {
                         $selected = $row['cat_id'] == $product_category ? 'selected' : '';

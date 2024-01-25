@@ -92,7 +92,6 @@ $products = select('ccc_products', 'product_id', ['*']);
                         <td><a href='product.php?action=update&product_id={$row['product_id']}'>Edit</a></td>
                     </tr>
                     ";
-
                 }
             }
             ?>

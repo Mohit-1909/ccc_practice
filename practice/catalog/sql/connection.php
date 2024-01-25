@@ -11,5 +11,3 @@ function makeConnection($servername, $username, $password, $dbName)
         return $connection;
     }
 }
-
-?>

@@ -3,10 +3,11 @@ require('connection.php');
 // Make the connection variable global
 $connection = makeConnection("localhost", "root", "", "ccc_practice");
 
-function getPara(string $key){
-    if(isset($_POST[$key])){
+function getPara(string $key)
+{
+    if (isset($_POST[$key])) {
         return $_POST[$key];
-    }elseif (isset($_GET[$key])) {
+    } elseif (isset($_GET[$key])) {
         return $_GET[$key];
     }
 };
@@ -26,7 +27,7 @@ function update($tablename, $where, $data)
     $c = implode(", ", $c);
     $w = implode(" AND ", $w);
 
-    $query= "UPDATE {$tablename} SET {$c} WHERE {$w};";
+    $query = "UPDATE {$tablename} SET {$c} WHERE {$w};";
     return $connection->query($query);
 }
 
@@ -41,7 +42,7 @@ function insert($table_name, $data)
     }
     $columns = implode(", ", $columns);
     $VALUES = implode(", ", $VALUES);
-    $query= "INSERT INTO {$table_name} ({$columns}) VALUES ({$VALUES})";
+    $query = "INSERT INTO {$table_name} ({$columns}) VALUES ({$VALUES})";
     return $connection->query($query);
 }
 
@@ -54,7 +55,7 @@ function delete(string $tablename, array $where)
         $where_cond[] = "`$col` = '$val'";
     };
     $where_cond = implode(" AND ", $where_cond);
-    $query=  "DELETE FROM {$tablename} WHERE {$where_cond};";
+    $query =  "DELETE FROM {$tablename} WHERE {$where_cond};";
     return $connection->query($query);
 }
 
@@ -81,7 +82,8 @@ function whereBasedSelect(string $table_name, array $where)
     return $connection->query($query);
 };
 
-function addCategory($name) {
+function addCategory($name)
+{
     global $connection;
     $stmt = $connection->prepare("INSERT INTO ccc_category (name) VALUES (?)");
     $stmt->bind_param("s", $name);
