@@ -65,7 +65,7 @@ function select(string $table_name, string $pk, array $columns)
     // Convert array of columns to a comma-separated string
     $columnsStr = implode(', ', $columns);
 
-    $query = "SELECT {$columnsStr} FROM `{$table_name}` ORDER BY `{$pk}` DESC ;";
+    $query = "SELECT {$columnsStr} FROM `{$table_name}` ORDER BY `{$pk}` ;";
     return $connection->query($query);
 }
 

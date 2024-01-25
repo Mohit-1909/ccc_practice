@@ -12,7 +12,7 @@ $product_price = "";
 $product_status = "";
 $product_created_at = "";
 $product_updated_at = "";
-$button_text = 'Submit';
+$button_text = 'submit';
 
 //Delete
 if(getPara('action') == 'delete' && getPara('product_id')){
@@ -68,8 +68,10 @@ if (getPara('submit')) {
         $insert_query = insert($keys[$i], getPara($keys[$i]));
         if ($insert_query) {
             echo "<script>alert('Data submitted successfully')</script>";
+            echo "<script>location. href='product_list.php'</script>";
         } else {
             echo "<script>alert('Data not submitted')</script>";
+            echo "<script>location. href='product_list.php'</script>";
         }
     };
 };
@@ -80,10 +82,10 @@ if (getPara('update')) {
     for ($i = 0; $i < count($keys); $i++) {
         $insert_query = update("ccc_products", ['product_id' => getPara('product_id')], getPara($keys[$i]));
         if ($insert_query) {
-            echo "<script>alert('Data submitted successfully')</script>";
+            echo "<script>alert('Data updated successfully')</script>";
             echo "<script>location. href='product_list.php'</script>";
         } else {
-            echo "<script>alert('Data not submitted')</script>";
+            echo "<script>alert('Data not updated')</script>";
             echo "<script>location. href='product_list.php'</script>";
         }
     };
@@ -172,7 +174,6 @@ if (getPara('update')) {
         echo "<input type='submit' name='$button_text' value='$uppercase' id='submit'>";
         ?>
     </form>
-    <a href="product_list.php" class="link">View Products</a>
 </body>
 
 </html>
