@@ -6,7 +6,7 @@
     <title>Product Form</title>
 </head>
 <body>
-    <form action="/practice/assignment/connecting_form.php" method="post">
+    <form action="connecting_form.php" method="post">
         <label for="productName">Product Name:</label>
         <input type="text" id="productName" name="productName" required><br><br>
 

@@ -63,8 +63,8 @@ function select(string $table_name, array $columns, int $limit)
     return $connection->query($query);
 };
 
-insert("ABC",$_POST["group1"]);
-//echo "<pre>";
-print_r($_POST["group1"]);
-print_r($_POST["group2"]);
-die;
+// insert("ABC",$_POST["group1"]);
+// //echo "<pre>";
+// print_r($_POST["group1"]);
+// print_r($_POST["group2"]);
+// die;

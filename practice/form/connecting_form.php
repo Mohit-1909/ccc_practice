@@ -7,8 +7,6 @@ $password = "";
 $dbName = "ccc_practice";
 
 $connection = makeConnection($servername, $username, $password, $dbName);
-die;
-
 
 
 if(isset($_POST["Submit"])) {
