@@ -1,9 +1,38 @@
 <?php
+
+class Data_Object
+{
+    protected $_row = [];
+    public function __construct($row)
+    {
+        $this->_row = $row;
+    }
+    public function __call($name, $args)
+    {
+        $name = substr($name, 3);
+        return isset($this->_row[$name])
+            ? $this->_row[$name]
+            : '';
+    }
+}
+
+
 class View_Product
 {
+    public $newObj;
     public function __construct()
     {
+        $obj = new Model_Request();
+        var_dump($obj->getQueryData('id'));
+        $id = ($obj->getQueryData('id'));
+        $obj = new Lib_Sql_Query_Builder();
+        $sql = $obj->select("ccc_products", "*", ["product_id" => $id]);
+        $test = $obj->exec($sql);
 
+        // print_r($obj->fetchAssoc($test));
+        $data = $obj->fetchAssoc($test);
+        // var_dump($data[0]);
+        $this->newObj = new Data_Object($data[0]);
     }
 
     public function createForm()
@@ -12,10 +41,10 @@ class View_Product
         $form .= '<h2>Add Details</h2>'; // Added heading here
         $form .= '<form action="" method="POST">';
         $form .= '<div>';
-        $form .= $this->createTextField('pdata[ProductName]', "Product Name: ");
+        $form .= $this->createTextField('pdata[ProductName]', "Product Name: ", $this->newObj->getProductName());
         $form .= '</div>';
         $form .= '<div>';
-        $form .= $this->createTextField('pdata[SKU]', "Sku: ");
+        $form .= $this->createTextField('pdata[SKU]', "Sku: ", $this->newObj->getSKU());
         $form .= '</div>';
         $form .= '<div>';
         $form .= $this->createRadioBtn('pdata[ProductType]', "ProductType: ", ['Simple', 'Bundle']);
@@ -34,22 +63,22 @@ class View_Product
         ], '', 'product_category');
         $form .= '</div>';
         $form .= '<div>';
-        $form .= $this->createTextField('pdata[ManufacturerCost]', "ManufacturerCost: ");
+        $form .= $this->createTextField('pdata[ManufacturerCost]', "ManufacturerCost: ", $this->newObj->getManufacturerCost());
         $form .= '</div>';
         $form .= '<div>';
-        $form .= $this->createTextField('pdata[ShippingCost]', "ShippingCost: ");
+        $form .= $this->createTextField('pdata[ShippingCost]', "ShippingCost: ", $this->newObj->getShippingCost());
         $form .= '</div>';
         $form .= '<div>';
-        $form .= $this->createTextField('pdata[TotalCost]', "TotalCost: ");
+        $form .= $this->createTextField('pdata[TotalCost]', "TotalCost: ", $this->newObj->getTotalCost());
         $form .= '</div>';
         $form .= '<div>';
-        $form .= $this->createTextField('pdata[Price]', "Price: ");
+        $form .= $this->createTextField('pdata[Price]', "Price: ",  $this->newObj->getPrice());
         $form .= '</div>';
         $form .= '<div>';
         $form .= $this->createDropDown('ccc_product[product_status]', "Status: ", [
             "enabled" => 'Enabled',
             "disabled" => 'Disabled',
-        ], '', 'product_status');
+        ], $this->newObj->getStatus(), 'product_status');
         $form .= '</div>';
         $form .= '<div>';
         $form .= $this->createDateInput('pdata[CreatedAt]', "Created At: ");
@@ -99,7 +128,7 @@ class View_Product
 
     public function createSubmitBtn($title)
     {
-        return '<input type="submit" name="submit" value="'.$title.'">';
+        return '<input type="submit" name="submit" value="' . $title . '">';
     }
 
     public function toHtml()
@@ -107,4 +136,3 @@ class View_Product
         return $this->createForm();
     }
 }
-?>
