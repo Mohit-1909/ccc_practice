@@ -1,209 +1,209 @@
 <?php
-// Data Types :
-// 1. Integer
-//    - Represents whole numbers without a decimal point.
-   	$integerVar = 42 . PHP_EOL;   
-// 2. Float 
-//    - Represents numbers with a decimal point.
-   	$floatVar = 3.14 . PHP_EOL;
-// 3. String
-//    - Represents a sequence of characters.
-$stringVar = "Hello, PHP!" . PHP_EOL;
-// 4. Boolean
-//    - Represents either `true` or `false`.
-   	$boolVar = true . PHP_EOL;
-// 5. Array
-//    - Represents an ordered map that can hold multiple values.
-   	$arrayVar = array(1, 2, 3, "PHP") . PHP_EOL;
-// 6. NULL
-//    - Represents the absence of a value or a variable without a value.
-   	$nullVar = null . PHP_EOL;
+// // Data Types :
+// // 1. Integer
+// //    - Represents whole numbers without a decimal point.
+// $integerVar = 42 . PHP_EOL;
+// // 2. Float 
+// //    - Represents numbers with a decimal point.
+// $floatVar = 3.14 . PHP_EOL;
+// // 3. String
+// //    - Represents a sequence of characters.
+// $stringVar = "Hello, PHP!" . PHP_EOL;
+// // 4. Boolean
+// //    - Represents either `true` or `false`.
+// $boolVar = true . PHP_EOL;
+// // 5. Array
+// //    - Represents an ordered map that can hold multiple values.
+// $arrayVar = array(1, 2, 3, "PHP") . PHP_EOL;
+// // 6. NULL
+// //    - Represents the absence of a value or a variable without a value.
+// $nullVar = null . PHP_EOL;
 
 
-// casting to Integer
+// // casting to Integer
 
-$input = 10.25; // 10 int(10)
-$input = true; // 1 int(1)
-$input = false; // 0 int(0)
-$input = null; // 0 int(0)
-$input = "25%"; // 25 int(25)
-$input = "hello"; // 0 int(0)
-$input = "hello 123"; // 0 int(0)
-$output = (int)$input;
-echo $output;
-var_dump($output) . PHP_EOL;
-
-
-// Casting to Float
-
-$input = 10; // 10 float(10)
-$input = true; // 1 float(1)
-$input = false; // 0 float(0)
-$input = null; // 0 float(0)
-$input = "25%"; // 25 float(25)
-$input = "hello"; // 0 float(0)
-$input = "hello 123"; // 0 float(0)
-$output = (float)$input;
-echo $output;
-var_dump($output) . PHP_EOL;
+// $input = 10.25; // 10 int(10)
+// $input = true; // 1 int(1)
+// $input = false; // 0 int(0)
+// $input = null; // 0 int(0)
+// $input = "25%"; // 25 int(25)
+// $input = "hello"; // 0 int(0)
+// $input = "hello 123"; // 0 int(0)
+// $output = (int)$input;
+// echo $output;
+// var_dump($output) . PHP_EOL;
 
 
-// Casting to String
+// // Casting to Float
 
-$input = 150; // 150 string(3)"150"
-$input = 10.25; // 10.25 string(5)"10.25"
-$input = true; // 1 string(1)"1"
-$input = false; // string(0)""
-$input = null; // string(0)""
-$output = (string)$input;
-echo $output;
-var_dump($output) . PHP_EOL;
-
-
-// Casting to Boolean
-
-$input = 10; // 1 bool(true)
-$input = 1; // 1 bool(true)
-$input = 0; // bool(false)
-$input = 125.65; // 1 bool(true)
-$input = null; // bool(false)
-$input = "25%"; // 1 bool(true)
-$input = "hello"; // 1 bool(true)
-$input = ""; // bool(false)
-$output = (bool)$input;
-echo $output;
-var_dump($output) . PHP_EOL;
+// $input = 10; // 10 float(10)
+// $input = true; // 1 float(1)
+// $input = false; // 0 float(0)
+// $input = null; // 0 float(0)
+// $input = "25%"; // 25 float(25)
+// $input = "hello"; // 0 float(0)
+// $input = "hello 123"; // 0 float(0)
+// $output = (float)$input;
+// echo $output;
+// var_dump($output) . PHP_EOL;
 
 
-// Casting to Array
+// // Casting to String
 
-$input = 1; // Arrayarray(1)
-$input = 0; // Arrayarray(1)
-$input = 125.65; // Arrayarray(1)
-$input = "25%"; // Arrayarray(1)
-$input = "hello"; // Arrayarray(1)
-$output = (array)$input;
-print_r($output);
-var_dump($output) . PHP_EOL;
-
-
-// Math Functions:
-$number = 256.4556;
-// 1. Basic Arithmetic
-   echo abs($number) . PHP_EOL; 
-// Returns the absolute value of a number.
-   echo ceil($number) . PHP_EOL;
-// Rounds a number up to the nearest integer.
-   echo floor($number) . PHP_EOL; 
-// Rounds a number down to the nearest integer.
-$precision = 2;
-   echo round($number, $precision) . PHP_EOL;
-// Rounds a number to the nearest integer or specified number of decimal places.
-
-// 2. Power Functions
-$base = 2;
-$exponent = 3;
-   echo pow($base, $exponent) . PHP_EOL;
-// Returns the value of a base raised to the power of an exponent.
-$number = 49;
-   echo sqrt($number) . PHP_EOL;
-// Returns the square root of a number.
-
-// 3. Random Number Generation
-$min = 52;
-$max = 1000;
-   echo rand($min, $max) . PHP_EOL; 
-// Generates a random integer between the specified minimum and maximum 
-
-// 4. Number Formatting
-$number = 10000000000;
-$decimals = 2;
-$decimal_point= ".";
-$thousands_separator= ",";
-   echo number_format($number, $decimals, $decimal_point, $thousands_separator) . PHP_EOL;
-// Formats a number with grouped thousands and a specified number of decimals.
-
-// PHP Operators :
-// 1. Arithmetic Operators:
-$a = 6;
-$b = 4;
-$c = 7;
-// 1. Addition:
-   echo($a + $b) . PHP_EOL;
-// 2. Subtraction:
-echo($a - $b) . PHP_EOL;
-// 3. Multiplication:
-echo($a * $b) . PHP_EOL;
-// 4. Division:
-echo($a / $b) . PHP_EOL;
-// 5. Modulus (Remainder):
-echo($a % $b) . PHP_EOL;
-// 6. Exponentiation:
-echo($a ** $b) . PHP_EOL;
-
-// 2. Assignment Operators:
-
-// 7. Assignment:
-echo($a = $b) . PHP_EOL;
-// 8. Addition Assignment:
-echo($a += $b) . PHP_EOL;
-// 9. Subtraction Assignment:
-echo($a -= $b) . PHP_EOL;
-// 10. Multiplication Assignment:
-echo($a *= $b) . PHP_EOL;
-// 11. Division Assignment:
-echo($a /= $b) . PHP_EOL;
-// 12. Modulus Assignment:
-echo($a %= $b) . PHP_EOL;
+// $input = 150; // 150 string(3)"150"
+// $input = 10.25; // 10.25 string(5)"10.25"
+// $input = true; // 1 string(1)"1"
+// $input = false; // string(0)""
+// $input = null; // string(0)""
+// $output = (string)$input;
+// echo $output;
+// var_dump($output) . PHP_EOL;
 
 
-// 3. Comparison Operators:
+// // Casting to Boolean
 
-// 13. Equal:
-echo($a == $b) . PHP_EOL;
-// 14. Identical:
-echo($a === $b) . PHP_EOL;
-// 15. Not Equal:
-echo($a != $b) . PHP_EOL;
-echo($a <> $b) . PHP_EOL;
-// 16. Not Identical:
-echo($a !== $b) . PHP_EOL;
-// 17. Greater Than:
-echo($a > $b) . PHP_EOL;
-// 18. Less Than:
-echo($a < $b) . PHP_EOL;
-// 19. Greater Than or Equal To:
-echo($a >= $b) . PHP_EOL;
-// 20. Less Than or Equal To:
-echo($a <= $b) . PHP_EOL;
+// $input = 10; // 1 bool(true)
+// $input = 1; // 1 bool(true)
+// $input = 0; // bool(false)
+// $input = 125.65; // 1 bool(true)
+// $input = null; // bool(false)
+// $input = "25%"; // 1 bool(true)
+// $input = "hello"; // 1 bool(true)
+// $input = ""; // bool(false)
+// $output = (bool)$input;
+// echo $output;
+// var_dump($output) . PHP_EOL;
 
-// 4. Logical Operators:
-// 21. Logical AND:
-echo($a && $b) . PHP_EOL;
-// 22. Logical OR:
-echo($a || $b) . PHP_EOL;
-// 23. Logical NOT:
-echo(!$a) . PHP_EOL;
 
-// 5. Increment and Decrement Operators:
+// // Casting to Array
 
-// 24. Increment:
-echo(++$a) . PHP_EOL;
-echo($a++) . PHP_EOL;
-// 25. Decrement:
-echo(--$a) . PHP_EOL;
-echo($a--) . PHP_EOL;
+// $input = 1; // Arrayarray(1)
+// $input = 0; // Arrayarray(1)
+// $input = 125.65; // Arrayarray(1)
+// $input = "25%"; // Arrayarray(1)
+// $input = "hello"; // Arrayarray(1)
+// $output = (array)$input;
+// print_r($output);
+// var_dump($output) . PHP_EOL;
 
-// 6. String Operators:
-// 26. Concatenation:
-    echo($a . $b) . PHP_EOL;
-// 27. Concatenation Assignment:
-    echo($a .= $b) . PHP_EOL;
 
-// 7. Conditional (Ternary) Operator:
+// // Math Functions:
+// $number = 256.4556;
+// // 1. Basic Arithmetic
+// echo abs($number) . PHP_EOL;
+// // Returns the absolute value of a number.
+// echo ceil($number) . PHP_EOL;
+// // Rounds a number up to the nearest integer.
+// echo floor($number) . PHP_EOL;
+// // Rounds a number down to the nearest integer.
+// $precision = 2;
+// echo round($number, $precision) . PHP_EOL;
+// // Rounds a number to the nearest integer or specified number of decimal places.
 
-// 28. Ternary:
-    echo($a ? $b : $c) . PHP_EOL;
+// // 2. Power Functions
+// $base = 2;
+// $exponent = 3;
+// echo pow($base, $exponent) . PHP_EOL;
+// // Returns the value of a base raised to the power of an exponent.
+// $number = 49;
+// echo sqrt($number) . PHP_EOL;
+// // Returns the square root of a number.
+
+// // 3. Random Number Generation
+// $min = 52;
+// $max = 1000;
+// echo rand($min, $max) . PHP_EOL;
+// // Generates a random integer between the specified minimum and maximum 
+
+// // 4. Number Formatting
+// $number = 10000000000;
+// $decimals = 2;
+// $decimal_point = ".";
+// $thousands_separator = ",";
+// echo number_format($number, $decimals, $decimal_point, $thousands_separator) . PHP_EOL;
+// // Formats a number with grouped thousands and a specified number of decimals.
+
+// // PHP Operators :
+// // 1. Arithmetic Operators:
+// $a = 6;
+// $b = 4;
+// $c = 7;
+// // 1. Addition:
+// echo ($a + $b) . PHP_EOL;
+// // 2. Subtraction:
+// echo ($a - $b) . PHP_EOL;
+// // 3. Multiplication:
+// echo ($a * $b) . PHP_EOL;
+// // 4. Division:
+// echo ($a / $b) . PHP_EOL;
+// // 5. Modulus (Remainder):
+// echo ($a % $b) . PHP_EOL;
+// // 6. Exponentiation:
+// echo ($a ** $b) . PHP_EOL;
+
+// // 2. Assignment Operators:
+
+// // 7. Assignment:
+// echo ($a = $b) . PHP_EOL;
+// // 8. Addition Assignment:
+// echo ($a += $b) . PHP_EOL;
+// // 9. Subtraction Assignment:
+// echo ($a -= $b) . PHP_EOL;
+// // 10. Multiplication Assignment:
+// echo ($a *= $b) . PHP_EOL;
+// // 11. Division Assignment:
+// echo ($a /= $b) . PHP_EOL;
+// // 12. Modulus Assignment:
+// echo ($a %= $b) . PHP_EOL;
+
+
+// // 3. Comparison Operators:
+
+// // 13. Equal:
+// echo ($a == $b) . PHP_EOL;
+// // 14. Identical:
+// echo ($a === $b) . PHP_EOL;
+// // 15. Not Equal:
+// echo ($a != $b) . PHP_EOL;
+// echo ($a <> $b) . PHP_EOL;
+// // 16. Not Identical:
+// echo ($a !== $b) . PHP_EOL;
+// // 17. Greater Than:
+// echo ($a > $b) . PHP_EOL;
+// // 18. Less Than:
+// echo ($a < $b) . PHP_EOL;
+// // 19. Greater Than or Equal To:
+// echo ($a >= $b) . PHP_EOL;
+// // 20. Less Than or Equal To:
+// echo ($a <= $b) . PHP_EOL;
+
+// // 4. Logical Operators:
+// // 21. Logical AND:
+// echo ($a && $b) . PHP_EOL;
+// // 22. Logical OR:
+// echo ($a || $b) . PHP_EOL;
+// // 23. Logical NOT:
+// echo (!$a) . PHP_EOL;
+
+// // 5. Increment and Decrement Operators:
+
+// // 24. Increment:
+// echo (++$a) . PHP_EOL;
+// echo ($a++) . PHP_EOL;
+// // 25. Decrement:
+// echo (--$a) . PHP_EOL;
+// echo ($a--) . PHP_EOL;
+
+// // 6. String Operators:
+// // 26. Concatenation:
+// echo ($a . $b) . PHP_EOL;
+// // 27. Concatenation Assignment:
+// echo ($a .= $b) . PHP_EOL;
+
+// // 7. Conditional (Ternary) Operator:
+
+// // 28. Ternary:
+// echo ($a ? $b : $c) . PHP_EOL;
 
 // Array Functions :
 
@@ -377,21 +377,21 @@ echo "Original array: ";
 print_r($numbers);
 
 // 24. Filtering elements of an array using array_filter()
-$filteredArray = array_filter($numbers, function($element) {
+$filteredArray = array_filter($numbers, function ($element) {
     return $element % 2 == 0; // Keep only even numbers
 });
 echo "24. Filtered array (keeping only even numbers): ";
 print_r($filteredArray);
 
 // 25. Applying a callback function to each element of an array using array_map()
-$squaredArray = array_map(function($element) {
+$squaredArray = array_map(function ($element) {
     return $element ** 2; // Square each element
 }, $numbers);
 echo "25. Squared array: ";
 print_r($squaredArray);
 
 // 26. Iteratively reducing the array to a single value using array_reduce()
-$sum = array_reduce($numbers, function($carry, $element) {
+$sum = array_reduce($numbers, function ($carry, $element) {
     return $carry + $element; // Calculate the sum
 }, 0);
 echo "26. Sum of the array: $sum\n";

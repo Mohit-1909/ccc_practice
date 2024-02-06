@@ -18,7 +18,7 @@
 // $haystack = "I love playing baskeball, chess and badminton.";
 // $needle = "CHESS";
 // echo strripos($haystack, $needle);
-// strripos in case-insensitive unlike strrpos
+// strripos in case-insensitive unlike strrpos and also it finds the last occurrence of the string
 
 // $string = "I love playing baskeball, chess and badminton.";
 // $start = 2;
@@ -39,16 +39,17 @@
 // Removes whitespace or other predefined characters from the beginning and end of a string.
 
 // $glue = ['H', 'E'];
-// echo implode($glue);
+// $seperator = "hii";
+// echo implode($seperator, $glue);
 // Joins array elements with a string.
 
 // $string = "I love playing baskeball, chess and badminton.";
 // $delimiter = " ";
-// $NoofDivisions = 2;
-// print_r (explode($delimiter, $string, $NoofDivisions));
+// $NoofDivisions = 7;
+// print_r(explode($delimiter, $string, $NoofDivisions));
 // Splits a string into an array by a specified delimiter.
 
-// $string = "I <b>love</b> playing baskeball, chess and badminton.";
+// $string = "I <b>love</b> playing baskeball, \n chess and badminton.";
 // echo htmlspecialchars($string);
 // Converts special characters to HTML entities.
 
@@ -77,8 +78,9 @@
 // Converts a string to an array, breaking it into smaller chunks.
 
 // $string = "I love playing baskeball, chess and badminton.";
-// echo str_word_count($string);
-// Returns the number of words in a string.
+// $format = 0;
+// print_r(str_word_count($string, $format));
+// Returns the number of words in a string. format=0 returns count of words, format=1 returns array of all the words, format=2 returns array of words with index of the particular start. 
 
 // $string = "I love playing baskeball, chess and badminton.";
 // $replacement = "chekers";
@@ -87,7 +89,11 @@
 // echo substr_replace($string, $replacement, $start, $length);
 // Replaces a portion of a string with another string.
 
-// str_pad($string, $length, $pad_string, $pad_type):
+// $string = "I love playing baskeball, chess and badminton.";
+// $length = 57;
+// $pad_string = "Mohit";
+// $pad_type = STR_PAD_BOTH;
+// echo str_pad($string, $length, $pad_string, $pad_type);
 // Pads a string to a certain length with another string.
 
 // $string1 = "Hello";
@@ -101,15 +107,15 @@
 // $string = "I love playing baskeball, chess and badminton.";
 // $mask = 'b';
 // $start = 0;
-// $length = 8;
+// $length = 50;
 // echo strcspn($string, $mask, $start, $length);
 // Finds the length of the initial segment not matching a mask.
 
 // $haystack = "I love playing baskeball, chess and badminton.";
-// $needle = "chess";
-// $before_needle = "I";
+// $needle = "CHESS";
+// $before_needle = true;
 // echo stristr($haystack, $needle, $before_needle);
-// Case-insensitive search for the first occurrence of a string.
+// Case-insensitive(strstr) search for the first occurrence of a string.
 
 // $string = "I love playing baskeball, chess and badminton.";
 // $char_list = 'p';
@@ -117,8 +123,8 @@
 // Searches a string for any of a set of characters.
 
 // $haystack = "I love playing baskeball, chess and badminton.";
-// $needle = "chess";
-// $before_needle = "I";
+// $needle = "CHESS";
+// $before_needle = true;
 // echo strstr($haystack, $needle, $before_needle);
 // Finds the first occurrence of a string.
 
