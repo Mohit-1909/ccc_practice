@@ -1,138 +1,129 @@
 <?php
-
-class Data_Object
-{
-    protected $_row = [];
-    public function __construct($row)
-    {
-        $this->_row = $row;
-    }
-    public function __call($name, $args)
-    {
-        $name = substr($name, 3);
-        return isset($this->_row[$name])
-            ? $this->_row[$name]
-            : '';
-    }
-}
-
-
 class View_Product
 {
     public $newObj;
     public function __construct()
     {
         $obj = new Model_Request();
-        var_dump($obj->getQueryData('id'));
-        $id = ($obj->getQueryData('id'));
-        $obj = new Lib_Sql_Query_Builder();
-        $sql = $obj->select("ccc_products", "*", ["product_id" => $id]);
-        $test = $obj->exec($sql);
+        $id = $obj->getQueryData('product_id');
+        //echo '$id'.$id;
+        $obj = new Model_Abstract();
+        $query = $obj->getQueryBuider()->select("ccc_product", "*", ['product_id' => $id]);
+        $result = $obj->getQueryExecutor()->exec($query);
 
-        // print_r($obj->fetchAssoc($test));
-        $data = $obj->fetchAssoc($test);
-        // var_dump($data[0]);
-        $this->newObj = new Data_Object($data[0]);
+        $row = $obj->getQueryExecutor()->FetchRow($result);
+        //print_r($row);
+        $this->newObj = new Model_Data_Object($row);
     }
-
     public function createForm()
     {
-        $form = '<div class="form-container">';
-        $form .= '<h2>Add Details</h2>'; // Added heading here
+        // echo $this->rowObj->getproduct_id();
+        $div = '<div class="form-group">';
+        $form = '<div class="box">
+                <div class="container">
+                    <div class="title">Product Information</div>
+                    <div class="content">';
         $form .= '<form action="" method="POST">';
-        $form .= '<div>';
-        $form .= $this->createTextField('pdata[ProductName]', "Product Name: ", $this->newObj->getProductName());
+
+        $form .= '<div class="user-details">';
+
+        $form .= '<div class="input-box">';
+        $form .= $this->creteTextField('pdata[product_id]', "Product ID: ", $this->newObj->getproduct_id(), "product_id", "Enter Product ID");
+        $form .= '</div><br>';
+
+        $form .= '<div class="input-box">';
+        $form .= $this->creteTextField('pdata[ProductName]', "Product Name: ", $this->newObj->getProductName(), "ProductName", "Enter Product Name");
+        $form .= '</div><br>';
+
+        $form .= '<div  class="input-box">';
+        $form .= $this->creteTextField('pdata[SKU]', "Sku: ", $this->newObj->getSKU(), "SKU ", "Enter SKU");
+        $form .= '</div><br>';
+
+        $form .= '<div  class="input-box-1">';
+        $form .= $this->creteSpan("Product Type: ", "productType") . "<br>";
+        $form .= $this->creteRadioButton('pdata[productType]', "Simple", $this->newObj->getproductType(), "simpleType") . "<br>";
+        $form .= $this->creteRadioButton('pdata[productType]', "Bundle", $this->newObj->getproductType(), "bundleType");
+        $form .= '</div><br>';
+
+        $form .= '<div  class="input-box">';
+        $categories = ["--Select--", "Bar & Game Room", "Bedroom", "Decor", "Dining & Kitchen", "Lighting", "Living Room", "Mattresses", "Office", "Outdoor"];
+        $form .= $this->creteSelect('pdata[category]', "Category: ", $categories, $this->newObj->getCategory(), "category");
+        $form .= '</div><br>';
+
+        $form .= '<div class="input-box">';
+        $form .= $this->creteTextField('pdata[manufacturerCost]', "Manufacturer Cost: ", $this->newObj->getmanufacturerCost(), "manufacturerCost", "Enter Manufacturer Cost");
+        $form .= '</div><br>';
+
+        $form .= '<div class="input-box">';
+        $form .= $this->creteTextField('pdata[shippingCost]', "Shipping Cost: ", $this->newObj->getshippingCost(), "shippingCost", "Enter Shipping Cost");
+        $form .= '</div><br>';
+
+        $form .= '<div class="input-box">';
+        $form .= $this->creteTextField('pdata[price]', "Price: ", $this->newObj->getprice(), "price", "Enter Price");
+        $form .= '</div><br>';
+
+        $form .= '<div class="input-box">';
+        $status = ["--Select--", "Enabled", "Disabled"];
+        $form .= $this->creteSelect('pdata[status]', "Status: ", $status,  $this->newObj->getstatus(), "status");
+        $form .= '</div><br>';
+
+        $form .= '<div class="input-box">';
+        $form .= $this->creteDateField('pdata[createdAt]', "Created At: ", $this->newObj->getcreatedAt(), "createdAt");
+        $form .= '</div><br>';
+
+        $form .= '<div class="input-box">';
+        $form .= $this->creteDateField('pdata[updatedAt]', "Updated At: ", $this->newObj->getupdatedAt(), "updatedAt");
+        $form .= '</div><br>';
+
         $form .= '</div>';
-        $form .= '<div>';
-        $form .= $this->createTextField('pdata[SKU]', "Sku: ", $this->newObj->getSKU());
-        $form .= '</div>';
-        $form .= '<div>';
-        $form .= $this->createRadioBtn('pdata[ProductType]', "ProductType: ", ['Simple', 'Bundle']);
-        $form .= '</div>';
-        $form .= '<div>';
-        $form .= $this->createDropDown('pdata[cat_id]', "Category: ", [
-            1 => 'Bar & Game Room',
-            2 => 'Bedroom',
-            3 => 'Decor',
-            4 => 'Dining & Kitchen',
-            5 => 'Lighting',
-            6 => 'Living Room',
-            7 => 'Mattresses',
-            8 => 'Office',
-            9 => 'Outdoor',
-        ], '', 'product_category');
-        $form .= '</div>';
-        $form .= '<div>';
-        $form .= $this->createTextField('pdata[ManufacturerCost]', "ManufacturerCost: ", $this->newObj->getManufacturerCost());
-        $form .= '</div>';
-        $form .= '<div>';
-        $form .= $this->createTextField('pdata[ShippingCost]', "ShippingCost: ", $this->newObj->getShippingCost());
-        $form .= '</div>';
-        $form .= '<div>';
-        $form .= $this->createTextField('pdata[TotalCost]', "TotalCost: ", $this->newObj->getTotalCost());
-        $form .= '</div>';
-        $form .= '<div>';
-        $form .= $this->createTextField('pdata[Price]', "Price: ",  $this->newObj->getPrice());
-        $form .= '</div>';
-        $form .= '<div>';
-        $form .= $this->createDropDown('ccc_product[product_status]', "Status: ", [
-            "enabled" => 'Enabled',
-            "disabled" => 'Disabled',
-        ], $this->newObj->getStatus(), 'product_status');
-        $form .= '</div>';
-        $form .= '<div>';
-        $form .= $this->createDateInput('pdata[CreatedAt]', "Created At: ");
-        $form .= '</div>';
-        $form .= '<div>';
-        $form .= $this->createDateInput('pdata[UpdatedAt]', "Updated At: ");
-        $form .= '</div>';
-        $form .= '<div>';
-        $form .= $this->createSubmitBtn('Submit');
-        $form .= '</div>';
+
+        $form .= '<div class="button">';
+        $form .= $this->creteSubmitBtn('Submit');
+        $form .= '</div><br>';
+
         $form .= '</form>';
-        $form .= '</div>';
+        $form .= ' </div>
+                </div>
+            </div>';
         return $form;
     }
-
-    public function createTextField($name, $title, $value = '', $id = '')
+    public function creteTextField($name, $title, $value = '', $id = '', $placeholder = '')
     {
-        return '<span> ' . $title . ' </span><input id="' . $id . '" type="text" name="' . $name . '" value="' . $value . '">';
+        return '<span class="details"> ' . $title . ' </span><input id="' . $id . '" type="text" name="' . $name . '" value="' . $value . '" placeholder="' . $placeholder . '">';
     }
-
-    public function createRadioBtn($name, $title, $values, $default = 'Simple')
+    public function creteSpan($title, $id = '')
     {
-        $radioBtns = '<span> ' . $title . ' </span>';
-        foreach ($values as $value) {
-            $checked = ($value == $default) ? 'checked' : '';
-            $radioBtns .= '<input type="radio" name="' . $name . '" value="' . $value . '" ' . $checked . '> ' . $value . ' ';
+        return '<span for="' . $id . '" class="details"> ' . $title . ' </span>';
+    }
+    public function creteRadioButton($name, $label, $value = '', $id = '')
+    {
+        return '<input type="radio" id="' . $id . '" name="' . $name . '" value="' . $label . '"' . (($value == $label) ? 'checked' : '') . '>' . $label . '';
+    }
+    public function creteSelect($name, $title, $array, $value = '', $id = '')
+    {
+        $var = '<span for="' . $id . '" class="details"> ' . $title . ' </span>';
+        $var .= '<select id="' . $id . '" name="' . $name . '" value="' . $value . '">';
+        foreach ($array as $val) {
+            $var .= '<option value="' . $val . '"' . (($value == $val) ? 'selected' : '') . '>' . $val . '</option>';
         }
-        return $radioBtns;
-    }
+        $var .= '</select>';
 
-    public function createDropDown($name, $title, $options = array(), $selected = '', $id = '')
+        return $var;
+    }
+    public function creteDateField($name, $title, $value, $id = '')
     {
-        $dropdown = '<div>' . $title;
-        $dropdown .= "<select id={$id} name={$name}>";
-        foreach ($options as $key => $value) {
-            $selectedAttr = ($key == $selected) ? 'selected="selected"' : '';
-            $dropdown .= "<option value={$key} class={$id} {$selectedAttr}>{$value}</option>";
-        }
-        $dropdown .= '</select>' . '</div>';
-        return $dropdown;
+        return '<span class="details"> ' . $title . ' </span><input id="' . $id . '" type="date" name="' . $name . '" value="' . $value . '">';
     }
-
-    public function createDateInput($name, $title, $value = '', $id = '')
-    {
-        return '<span> ' . $title . ' </span><input id="' . $id . '" type="date" name="' . $name . '" value="' . $value . '">';
-    }
-
-    public function createSubmitBtn($title)
+    public function creteSubmitBtn($title)
     {
         return '<input type="submit" name="submit" value="' . $title . '">';
     }
-
     public function toHtml()
     {
-        return $this->createForm();
+        // $css = '<link rel="stylesheet" href="View/CSS/styles.css">';
+        // $form = $this->createForm();
+        // return $css . $form;
+
+        echo "Product.php";
     }
 }

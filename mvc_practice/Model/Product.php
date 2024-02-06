@@ -1,24 +1,20 @@
 <?php
-class Model_Product extends Model_Abstract
-{
-    public $tableName = "ccc_products";
-
-    public function __construct()
-    {
-        // echo "I'm here";
-        // echo get_class($this);
+class Model_Product extends Model_Abstract{
+    public function __construct(){
+        
     }
-
-    public function save($data)
-    {
-        echo "<pre>";
-        $sql = $this->getQueryBuilder()
-            ->insert(
-                $this->tableName,
-                $data
-            );
-        return $this->getQueryBuilder()->exec($sql);
-        // echo $sql;
-        // print_r($data);
+    public function add($data){
+        $sql=$this->getQueryBuider()->insert('ccc_product',$data);
+        return $this->getQueryExecutor()->exec($sql);
+    }
+    public function upd($data,$where){
+        $sql=$this->getQueryBuider()->update('ccc_product',$data,$where);
+        return $this->getQueryExecutor()->exec($sql);
+    }
+    public function dlt($where){
+        $sql=$this->getQueryBuider()->delete('ccc_product',$where);
+        return $this->getQueryExecutor()->exec($sql);
     }
 }
+
+?>
