@@ -8,7 +8,7 @@ class View_Product
         $id = $obj->getQueryData('product_id');
         //echo '$id'.$id;
         $obj = new Model_Abstract();
-        $query = $obj->getQueryBuider()->select("ccc_product", "*", ['product_id' => $id]);
+        $query = $obj->getQueryBuilder()->select("ccc_product", "*", ['product_id' => $id]);
         $result = $obj->getQueryExecutor()->exec($query);
 
         $row = $obj->getQueryExecutor()->FetchRow($result);
@@ -27,9 +27,9 @@ class View_Product
 
         $form .= '<div class="user-details">';
 
-        $form .= '<div class="input-box">';
-        $form .= $this->creteTextField('pdata[product_id]', "Product ID: ", $this->newObj->getproduct_id(), "product_id", "Enter Product ID");
-        $form .= '</div><br>';
+        // $form .= '<div class="input-box">';
+        // $form .= $this->creteTextField('pdata[product_id]', "Product ID: ", $this->newObj->getproduct_id(), "product_id", "Enter Product ID");
+        // $form .= '</div><br>';
 
         $form .= '<div class="input-box">';
         $form .= $this->creteTextField('pdata[ProductName]', "Product Name: ", $this->newObj->getProductName(), "ProductName", "Enter Product Name");
@@ -56,6 +56,10 @@ class View_Product
 
         $form .= '<div class="input-box">';
         $form .= $this->creteTextField('pdata[shippingCost]', "Shipping Cost: ", $this->newObj->getshippingCost(), "shippingCost", "Enter Shipping Cost");
+        $form .= '</div><br>';
+
+        $form .= '<div class="input-box">';
+        $form .= $this->creteTextField('pdata[total]', "Total Cost: ", $this->newObj->getTotalCost(), "Total Cost", "Enter Total Cost");
         $form .= '</div><br>';
 
         $form .= '<div class="input-box">';
@@ -120,10 +124,10 @@ class View_Product
     }
     public function toHtml()
     {
-        // $css = '<link rel="stylesheet" href="View/CSS/styles.css">';
-        // $form = $this->createForm();
-        // return $css . $form;
+        $css = '<link rel="stylesheet" href="View/CSS/styles.css">';
+        $form = $this->createForm();
+        return $css . $form;
 
-        echo "Product.php";
+        // echo "Product.php";
     }
 }

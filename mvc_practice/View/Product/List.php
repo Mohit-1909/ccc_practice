@@ -5,7 +5,7 @@ class View_Product_List
     public function __construct()
     {
         $obj = new Model_Abstract();
-        $query = $obj->getQueryBuider()->select("ccc_product", "*");
+        $query = $obj->getQueryBuilder()->select("ccc_product", "*");
         $result = $obj->getQueryExecutor()->exec($query);
         $rows = $obj->getQueryExecutor()->FetchAssoc($result);
         $this->rowObj = new Model_Data_Collection();
@@ -49,10 +49,10 @@ class View_Product_List
     }
     public function toHtml()
     {
-        // $css = '<link rel="stylesheet" href="View/CSS/styles.css">';
-        // $form = $this->createTable();
-        // return $css . $form;
+        $css = '<link rel="stylesheet" href="View/CSS/styles.css">';
+        $form = $this->createTable();
+        return $css . $form;
 
-        echo "Product_List.php";
+        // echo "Product_List.php";
     }
 }
