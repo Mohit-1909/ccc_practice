@@ -7,11 +7,11 @@ class View_Product
         $obj = new Model_Request();
         $id = $obj->getQueryData('product_id');
         //echo '$id'.$id;
-        $obj = new Model_Abstract();
-        $query = $obj->getQueryBuilder()->select("ccc_product", "*", ['product_id' => $id]);
-        $result = $obj->getQueryExecutor()->exec($query);
+        $obj1 = new Model_Abstract();
+        $query = $obj1->getQueryBuilder()->select("ccc_product", "*", ['product_id' => $id]);
+        $result = $obj1->getQueryExecutor()->exec($query);
 
-        $row = $obj->getQueryExecutor()->FetchRow($result);
+        $row = $obj1->getQueryExecutor()->FetchRow($result);
         //print_r($row);
         $this->newObj = new Model_Data_Object($row);
     }
