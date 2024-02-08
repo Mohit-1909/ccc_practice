@@ -5,9 +5,12 @@ class Mage
     public static function init()
     {
         // $requestModel = new Core_Model_Request();
-        $requestModel = Mage::getModel("core/request");
-        $requestUri = $requestModel->getRequestUri();
-        echo $requestUri;
+        // $requestModel = Mage::getModel("core/request");
+        // $requestUri = $requestModel->getRequestUri();
+        // echo $requestUri;
+
+        $frontController = new Core_Controller_Front();
+        $frontController->init();
     }
 
     public static function getModel($className)
