@@ -8,6 +8,10 @@ Root Folder
                 /Model
                 /Controller
                 /View
+            /Core
+                /Model
+                /Controller
+                /View
         /design/frontend/tempalte/
                                 /product
                                     /form.phtml

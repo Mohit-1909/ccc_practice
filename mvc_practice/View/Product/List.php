@@ -50,11 +50,8 @@ class View_Product_List
     public function toHtml()
     {
         $css = '<link rel="stylesheet" href="../View/CSS/styles.css">';
-        // $css = '<link rel="stylesheet" href="View/CSS/styles.css">';
-
         $form = $this->createTable();
         return $css . $form;
-
         // echo "Product_List.php";
     }
 }
