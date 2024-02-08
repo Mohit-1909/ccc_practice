@@ -1,5 +1,18 @@
 <?php
 include 'Lib/autoload.php';
+
+
+class Ccc
+{
+    public static function init()
+    {
+        $frontController = new Controller_Front();
+        $frontController->init();
+    }
+}
+Ccc::init();
+
+
 $request = new Model_Request();
 $action = $request->getQueryData('action');
 $id = $request->getQueryData('product_id');
