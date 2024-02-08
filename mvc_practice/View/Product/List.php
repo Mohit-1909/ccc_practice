@@ -28,7 +28,7 @@ class View_Product_List
                             <th>Product SKU</th>
                             <th>Category</th>
                             <th>Edit</th>
-                            <th>delete</th>
+                            <th>Delete</th>
                         </tr>';
         foreach ($this->rowObj->getData() as $data) {
             $table .=
@@ -49,7 +49,9 @@ class View_Product_List
     }
     public function toHtml()
     {
-        $css = '<link rel="stylesheet" href="View/CSS/styles.css">';
+        $css = '<link rel="stylesheet" href="../View/CSS/styles.css">';
+        // $css = '<link rel="stylesheet" href="View/CSS/styles.css">';
+
         $form = $this->createTable();
         return $css . $form;
 

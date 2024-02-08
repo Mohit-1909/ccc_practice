@@ -1,4 +1,4 @@
-<pre><?php
+<?php
         class Lib_Sql_Query_Builder extends Lib_Sql_Connection
         {
 
