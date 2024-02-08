@@ -9,7 +9,7 @@ class Controller_Front
         $requestUri = "View/" . ucwords(str_replace('/practice/mvc_practice/',  '', $requestUri), "/");
         $className = str_replace("/", "_", $requestUri);
         $layout = new $className();
-        // echo $className;
+        echo $className;
         return $layout->toHtml();
     }
 }

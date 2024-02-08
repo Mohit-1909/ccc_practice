@@ -4,6 +4,6 @@ class View_Product_List_Grid
     public function toHtml()
     {
 
-        echo "Product_List_Grid.php";
+        echo "<br><br>Product List Grid page";
     }
 }

@@ -41,8 +41,8 @@ class View_Product
 
         $form .= '<div  class="input-box-1">';
         $form .= $this->creteSpan("Product Type: ", "productType") . "<br>";
-        $form .= $this->creteRadioButton('pdata[productType]', "Simple", $this->newObj->getproductType(), "simpleType") . "<br>";
-        $form .= $this->creteRadioButton('pdata[productType]', "Bundle", $this->newObj->getproductType(), "bundleType");
+        $form .= $this->creteRadioButton('pdata[productType]', "Simple", $this->newObj->getProductType(), "simpleType") . "<br>";
+        $form .= $this->creteRadioButton('pdata[productType]', "Bundle", $this->newObj->getProductType(), "bundleType");
         $form .= '</div><br>';
 
         $form .= '<div  class="input-box">';
@@ -51,11 +51,11 @@ class View_Product
         $form .= '</div><br>';
 
         $form .= '<div class="input-box">';
-        $form .= $this->creteTextField('pdata[manufacturerCost]', "Manufacturer Cost: ", $this->newObj->getmanufacturerCost(), "manufacturerCost", "Enter Manufacturer Cost");
+        $form .= $this->creteTextField('pdata[manufacturerCost]', "Manufacturer Cost: ", $this->newObj->getManufacturerCost(), "manufacturerCost", "Enter Manufacturer Cost");
         $form .= '</div><br>';
 
         $form .= '<div class="input-box">';
-        $form .= $this->creteTextField('pdata[shippingCost]', "Shipping Cost: ", $this->newObj->getshippingCost(), "shippingCost", "Enter Shipping Cost");
+        $form .= $this->creteTextField('pdata[shippingCost]', "Shipping Cost: ", $this->newObj->getShippingCost(), "shippingCost", "Enter Shipping Cost");
         $form .= '</div><br>';
 
         $form .= '<div class="input-box">';
@@ -63,20 +63,20 @@ class View_Product
         $form .= '</div><br>';
 
         $form .= '<div class="input-box">';
-        $form .= $this->creteTextField('pdata[price]', "Price: ", $this->newObj->getprice(), "price", "Enter Price");
+        $form .= $this->creteTextField('pdata[price]', "Price: ", $this->newObj->getPrice(), "price", "Enter Price");
         $form .= '</div><br>';
 
         $form .= '<div class="input-box">';
         $status = ["--Select--", "Enabled", "Disabled"];
-        $form .= $this->creteSelect('pdata[status]', "Status: ", $status,  $this->newObj->getstatus(), "status");
+        $form .= $this->creteSelect('pdata[status]', "Status: ", $status,  $this->newObj->getStatus(), "status");
         $form .= '</div><br>';
 
         $form .= '<div class="input-box">';
-        $form .= $this->creteDateField('pdata[createdAt]', "Created At: ", $this->newObj->getcreatedAt(), "createdAt");
+        $form .= $this->creteDateField('pdata[createdAt]', "Created At: ", $this->newObj->getCreatedAt(), "createdAt");
         $form .= '</div><br>';
 
         $form .= '<div class="input-box">';
-        $form .= $this->creteDateField('pdata[updatedAt]', "Updated At: ", $this->newObj->getupdatedAt(), "updatedAt");
+        $form .= $this->creteDateField('pdata[updatedAt]', "Updated At: ", $this->newObj->getUpdatedAt(), "updatedAt");
         $form .= '</div><br>';
 
         $form .= '</div>';
