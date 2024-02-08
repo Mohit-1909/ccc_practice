@@ -65,7 +65,7 @@ class Core_Model_Request
 
     public function getFullControllerClass()
     {
-        $controllerClass = implode('_', ['Page', 'Controller', ucfirst($this->_controllerName)]);
+        $controllerClass = implode('_', [ucfirst($this->_moduleName), 'Controller', ucfirst($this->_controllerName)]);
         return $controllerClass;
     }
 
