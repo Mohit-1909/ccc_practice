@@ -17,8 +17,7 @@ class Core_Model_Request
     }
     public function getParams($key = '')
     {
-        return ($key == '')
-            ? $_REQUEST
+        return ($key == '') ? $_REQUEST
             : (isset($_REQUEST[$key])
                 ? $_REQUEST[$key]
                 : '');
