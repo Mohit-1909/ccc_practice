@@ -1,0 +1,168 @@
+SQL Weekend-Practice
+
+- UPDATE query with join and tables and where condition
+
+UPDATE table1
+JOIN table2 ON table1.column_name = table2.column_name
+SET table1.column_name = new_value
+WHERE condition;
+
+Example:-
+
+UPDATE ccc_product p
+JOIN ccc_category c ON p.category_id = c.category_id
+SET p.price = p.price * 1.1
+WHERE c.category_name = 'Electronics';
+
+***With INNER JOIN
+
+UPDATE table1
+INNER JOIN table2 ON table1.column_name = table2.column_name
+SET table1.column_name = new_value
+WHERE condition;
+
+Example:-
+
+UPDATE ccc_product AS p
+INNER JOIN ccc_category AS c ON p.category_id = c.category_id
+SET p.price = p.price * 1.1
+WHERE c.category_name = 'Electronics';
+
+
+- INSERT query
+
+INSERT INTO table_name (column1, column2, ...)
+VALUES (value1, value2, ...);
+
+Example:-
+
+INSERT INTO ccc_category (category_id, category_name)
+VALUES (1, 'Electronics');
+
+**INSERT on Duplicate
+
+INSERT INTO table_name (column1, column2, ...)
+VALUES (value1, value2, ...)
+ON DUPLICATE KEY UPDATE column1 = value1, column2 = value2, ...;
+
+
+Example:-
+
+INSERT INTO ccc_category (category_id, category_name)
+VALUES (1, 'Electronics')
+ON DUPLICATE KEY UPDATE category_name = 'Electronics';
+
+
+- SELECT query with Order By, Group by, Limit and Where conditions and JOIN tables
+
+1) ORDER BY
+SELECT * FROM tablename 
+ORDER BY column-1, column-2… ASC|DESC; (Default ASC)
+
+SELECT * FROM customers 
+ORDER BY country, customer_name;
+=> Select all records from customers and sort them by country, if they are from the same country then sort by customer name.
+
+SELECT * FROM customers 
+ORDER BY country ASC, customer_name DESC;
+=> Select all records from customers and sort them by country in ascending order, if they are from the same country then sort by customer name in descending order.
+
+Example:
+SELECT * FROM `ccc_product` ORDER BY product_created_at;
+
+
+2) LIMIT
+SELECT * FROM tablename 
+LIMIT number;
+
+SELECT * FROM customers 
+LIMIT 3;
+=> Select first three records from customers.
+
+SELECT * FROM customers 
+LIMIT 3 OFFSET 3;
+=> Select three records starting from row 4 customers.
+
+SELECT * FROM customers 
+WHERE country = ’India’ 
+LIMIT 3;
+=> Select first three records from customers where the country is India.
+
+Example:
+SELECT * FROM `ccc_product` LIMIT 10;
+SELECT * FROM `ccc_product` LIMIT 10 OFFSET 9;
+
+
+3) WHERE
+SELECT * FROM tablename WHERE condition;
+
+SELECT * FROM customers 
+WHERE country = ’India’;
+=> Select all records from customers where the country is India.
+
+SELECT * FROM customers 
+WHERE customer_id = 1;
+=> Select records from customers where the customer id is 1.
+
+Operators Used:
+= Equal
+> Greater than
+< Less than
+>= Greater than or equal
+<= Less than or equal
+<> or != Not equal
+BETWEEN (between certain range)
+LIKE (search for a pattern)
+IN (to specify multiple value for a column)
+
+Example:
+SELECT * FROM `ccc_product` WHERE product_type = 'simple';
+SELECT * FROM `ccc_category` WHERE `cat_name` = 'Jeremy';
+
+
+4) JOIN
+4 Types:
+Inner Join
+SELECT * FROM tablename_1 
+INNER JOIN tablename_2 
+ON tablename_1.foreign_key = tablename_2.foreign_key;
+SELECT * FROM (
+(tablename_1 
+INNER JOIN tablename_2 
+ON tablename_1.foreign_key = tablename_2.foreign_key)  
+INNER JOIN tablename_3 
+ON tablename_1.foreign_key = tablename_3.foreign_key);
+Left Join
+Right Join
+Cross Join
+Example:
+SELECT ccc_product.`product_name`, ccc_category.`cat_name` 
+FROM ccc_product 
+INNER JOIN ccc_category 
+ON ccc_product.`cat_id`=ccc_category.`cat_id`;
+
+
+5) GROUP BY
+SELECT * FROM tablename 
+WHERE condition 
+GROUP BY column_names;
+
+SELECT COUNT(customer_id), country FROM customers 
+GROUP BY country;
+=> List the number of records in each country.
+
+SELECT shippers.shipper_name, COUNT(orders.order_id) FROM orders 
+INNER JOIN shippers 
+ON orders.shipper_id = shippers.shipper_id 
+GROUP BY shipper_name;
+=> List the number of orders shipped by each shipper.
+
+Example:
+SELECT COUNT(ccc_product.`product_name`) AS product_count, ccc_category.`cat_name` 
+FROM ccc_product 
+INNER JOIN ccc_category 
+ON ccc_product.`cat_id`=ccc_category.`cat_id` 
+GROUP BY cat_name;
+SELECT COUNT(product_name), product_sku FROM ccc_product 
+GROUP BY product_status;
+
