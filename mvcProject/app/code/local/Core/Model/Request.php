@@ -5,9 +5,10 @@ class Core_Model_Request
     public function __construct()
     {
         $requestUri = $this->getRequestUri();
-        if ($requestUri != "") {
-            $requestUri = explode("/", $requestUri);
-        }
+        // if ($requestUri != "") {
+        //     $requestUri = explode("/", $requestUri);
+        // }
+        $requestUri = array_filter(explode("/", $requestUri));
         // print_r($requestUri);
         $this->_moduleName = isset($requestUri[0]) ? $requestUri[0] : 'page';
         $this->_controllerName = isset($requestUri[1]) ? $requestUri[1] : 'index';
