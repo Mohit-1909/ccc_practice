@@ -25,6 +25,9 @@ class Core_Model_Abstract
     }
     public function getResource()
     {
+        $modelClass = get_class($this);
+        $class = substr($modelClass, 0, strpos($modelClass, '_Model_') + 6) . '_Resource_' . substr($modelClass, strpos($modelClass, '_Model_') + 7);
+        return new $class;
     }
     public function getCollection()
     {
@@ -34,6 +37,10 @@ class Core_Model_Abstract
     }
     public function getTableName()
     {
+    }
+    public function load($id, $column = null)
+    {
+        print_r($this->getResource());
     }
     public function __set($key, $value)
     {
@@ -57,9 +64,6 @@ class Core_Model_Abstract
     {
     }
     public function save()
-    {
-    }
-    public function load($id, $column = null)
     {
     }
     public function delete()
