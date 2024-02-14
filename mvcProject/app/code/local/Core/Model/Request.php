@@ -7,7 +7,7 @@ class Core_Model_Request
         $requestUri = $this->getRequestUri();
         // if ($requestUri != "") {
         //     $requestUri = explode("/", $requestUri);
-        // }
+        // } if you dont use array filter than you have to use this condition
         $requestUri = array_filter(explode("/", $requestUri));
         // print_r($requestUri);
         $this->_moduleName = isset($requestUri[0]) ? $requestUri[0] : 'page';
