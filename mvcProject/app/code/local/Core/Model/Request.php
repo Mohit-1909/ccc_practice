@@ -50,7 +50,8 @@ class Core_Model_Request
     {
         $url = $_SERVER['REQUEST_URI'];
         $url = str_replace('/practice/mvcProject/', '', $url);
-        $url = stristr($url, '?', true);
+        if (strpos($url, '?') !== false)
+            $url = stristr($url, '?', true);
         return $url;
     }
 
