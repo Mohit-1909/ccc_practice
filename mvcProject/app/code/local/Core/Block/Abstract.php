@@ -7,6 +7,7 @@ class Core_Block_Abstract
     public function setTemplate($template)
     {
         $this->template = $template;
+        return $this;
     }
     public function getTemplate()
     {
@@ -29,9 +30,14 @@ class Core_Block_Abstract
     }
     public function setData($data)
     {
+
     }
-    public function getUrl($action = null, $controller = null, $params = [], $resetParams = false)
+    // public function getUrl($action = null, $controller = null, $params = [], $resetParams = false)
+    // {
+    // }
+    public function getUrl($path)
     {
+        return "http://localhost/practice/mvcProject/" . $path;
     }
     public function getRequest()
     {

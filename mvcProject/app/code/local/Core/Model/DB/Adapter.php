@@ -25,6 +25,7 @@ class Core_Model_DB_Adapter
                 die("Connection failed: " . mysqli_connect_error());
             }
         }
+        return $this->connect;
 
     }
     public function fetchAll($query)
@@ -50,6 +51,12 @@ class Core_Model_DB_Adapter
     }
     public function insert($query)
     {
+        $result = mysqli_query($this->connect(), $query);
+        if (!$result) {
+            echo 'Error:' . mysqli_error($this->connect());
+            exit();
+        }
+        return mysqli_insert_id($this->connect());
     }
     public function update($query)
     {

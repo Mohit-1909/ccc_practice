@@ -9,10 +9,42 @@ class Catalog_Model_Resource_Product
         $this->_primaryKey = $primaryKey;
     }
 
+    public function getTableName()
+    {
+        return $this->_tableName;
+    }
+
     public function load($id, $column = null)
     {
         $sql = "SELECT * FROM  {$this->_tableName} WHERE `{$this->_primaryKey}`=$id LIMIT 1";
         return $this->getAdapter()->fetchRow($sql);
+    }
+
+    public function save(Catalog_Model_Product $product)
+    {
+        $data = $product->getData();
+        // print_r($data);
+        if (isset($data[$this->getPrimaryKey()])) {
+            unset($data[$this->getPrimaryKey()]);
+        }
+        $sql = $this->insertSql($this->getTableName(), $data);
+        $id = $this->getAdapter()->insert($sql);
+        $product->setId($id);
+        var_dump($id);
+    }
+
+    public function insertSql($tablename, $data)
+    {
+
+        $columns = $values = [];
+        foreach ($data as $column => $value) {
+            $columns[] = sprintf("`%s`", $column);
+            $values[] = sprintf("'%s'", addslashes($value));
+        }
+        $columns = implode(",", $columns);
+        $values = implode(",", $values);
+        $query = "INSERT INTO {$tablename} ({$columns}) VALUES ({$values})";
+        return $query;
     }
 
     public function getAdapter()
@@ -23,7 +55,7 @@ class Catalog_Model_Resource_Product
     //Above part is abstract
     public function __construct()
     {
-        $this->init('ccc_product', 'product_id');
+        $this->init('catalog_product', 'product_id');
     }
 
     public function getPrimaryKey()
