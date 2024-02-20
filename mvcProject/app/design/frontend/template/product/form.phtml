@@ -1,19 +1,126 @@
+<!-- catalog_product_form.phtml -->
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo</title>
+    <title>Catalog Product Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
-
 <body>
-    <h1>
-        <?php echo "Mohit";
-        // echo "<br>";
-        // print_r($this->getRequest()->getParams('id'));
-        ?>
-    </h1>
-</body>
+    <div class="container">
+        <h2>Add New Product</h2>
+        <form action="process_product.php" method="POST">
+            <label for="sku">SKU:</label>
+            <input type="text" id="sku" name="sku" required>
 
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="color">Color:</label>
+            <input type="text" id="color" name="color">
+
+            <label for="size">Size:</label>
+            <input type="text" id="size" name="size">
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description"></textarea>
+
+            <label for="image_link">Image Link:</label>
+            <input type="text" id="image_link" name="image_link">
+
+            <label for="link">Link:</label>
+            <input type="text" id="link" name="link">
+
+            <label for="category_id">Category ID:</label>
+            <input type="number" id="category_id" name="category_id" required>
+
+            <label for="price">Price:</label>
+            <input type="text" id="price" name="price" required>
+
+            <label for="mfr_cost">Manufacturer Cost:</label>
+            <input type="text" id="mfr_cost" name="mfr_cost">
+
+            <label for="shipping_cost">Shipping Cost:</label>
+            <input type="text" id="shipping_cost" name="shipping_cost">
+
+            <label for="total_cost">Total Cost:</label>
+            <input type="text" id="total_cost" name="total_cost">
+
+            <label for="margin_percentage">Margin Percentage:</label>
+            <input type="text" id="margin_percentage" name="margin_percentage">
+
+            <label for="min_price">Minimum Price:</label>
+            <input type="text" id="min_price" name="min_price">
+
+            <label for="status">Status:</label>
+            <input type="number" id="status" name="status" required>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
 </html>

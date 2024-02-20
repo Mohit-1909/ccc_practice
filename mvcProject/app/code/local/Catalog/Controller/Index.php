@@ -1,6 +1,6 @@
 <?php
 
-class Product_Controller_Index
+class Catalog_Controller_Index
 {
     public function newAction()
     {
@@ -12,11 +12,11 @@ class Product_Controller_Index
     }
     public function saveAction()
     {
-        echo "Address New Action";
+        echo "Address Save Action";
     }
     public function deleteAction()
     {
-        echo "Address New Action";
+        echo "Address Delete Action";
     }
 
 }
