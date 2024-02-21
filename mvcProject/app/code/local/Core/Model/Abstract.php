@@ -28,7 +28,8 @@ class Core_Model_Abstract
     }
     public function getId()
     {
-        return $this->_data[$this->getResource()->getPrimaryKey()];
+        $id = $this->_data[$this->getResource()->getPrimaryKey()];
+        return $id;
     }
     public function getResource()
     {
@@ -40,9 +41,9 @@ class Core_Model_Abstract
     public function getCollection()
     {
     }
-    public function getPrimaryKey()
-    {
-    }
+    // public function getPrimaryKey()
+    // {
+    // }
     public function getTableName()
     {
     }
@@ -97,6 +98,8 @@ class Core_Model_Abstract
     }
     public function delete()
     {
+        $this->getResource()->delete($this);
+        return $this;
     }
 
 

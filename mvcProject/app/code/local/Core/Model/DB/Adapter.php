@@ -4,10 +4,10 @@ class Core_Model_DB_Adapter
 {
 
     public $config = [
-        "database" => "ccc_practice",
         "host" => "localhost",
-        "password" => "",
         "user" => "root",
+        "password" => "",
+        "database" => "ccc_practice",
     ];
     public $connect = null;
     public function connect()
@@ -63,6 +63,12 @@ class Core_Model_DB_Adapter
     }
     public function delete($query)
     {
+        $result = mysqli_query($this->connect(), $query);
+        if (!$result) {
+            echo 'Error:' . mysqli_error($this->connect());
+            exit();
+        }
+        return $result;
     }
     public function query($query)
     {
