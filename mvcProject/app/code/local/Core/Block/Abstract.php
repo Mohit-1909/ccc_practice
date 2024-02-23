@@ -7,6 +7,7 @@ class Core_Block_Abstract
     public function setTemplate($template)
     {
         $this->template = $template;
+        // print_r($this); here we get object of Core_Block_Layout
         return $this;
     }
     public function getTemplate()

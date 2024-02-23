@@ -19,6 +19,8 @@ class Core_Block_Template extends Core_Block_Abstract
     public function getChild($key)
     {
         return $this->_child[$key];
+        // print_r($child);
+        // return $child;+
     }
     public function getChildHtml($key)
     {

@@ -52,6 +52,11 @@ class Core_Model_Abstract
         $this->_data = $this->getResource()->load($id, $column);
         return $this;
     }
+    public function loadAll()
+    {
+        $this->_data = $this->getResource()->loadAll();
+        return $this;
+    }
     public function camelCase2UnderScore($str, $separator = "_")
     {
         if (empty($str)) {
@@ -98,7 +103,9 @@ class Core_Model_Abstract
     }
     public function delete()
     {
-        $this->getResource()->delete($this);
+        if ($this->getId()) {
+            $this->getResource()->delete($this);
+        }
         return $this;
     }
 

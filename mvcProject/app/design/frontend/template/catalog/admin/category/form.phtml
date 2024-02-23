@@ -1,9 +1,20 @@
-<form action="" method="post">
-    <div>
-        <label for="category_name">Name:</label>
-        <input type="text" id="category_name">
-    </div>
+<?php
+$data = $this->getCategory();
+?>
+<div class="container">
+    <h2>Add New Product</h2>
+    <form action="<?php echo $this->getUrl('admin/catalog_category/save') ?>" method="POST">
+
+    <input type="hidden" value= "<?php echo $data->getCategoryId() ?>" id="sku" name="catalog_category[category_id]" >
+
+    <label for="category_name">Category Name</label>
+    <input type="text" value= "<?php echo $data->getCategoryName() ?>" id="category_name" name="catalog_category[category_name]" >
+
+    <label for="status">Status</label>
+    <input type="text" value= "<?php echo $data->getStatus() ?>" id="status" name="catalog_category[status]" >
     <div>
         <input type="submit" name="submit" value="Submit">
     </div>
+
 </form>
+</div>

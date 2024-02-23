@@ -45,7 +45,7 @@ class Core_Model_DB_Adapter
         while ($data = mysqli_fetch_assoc($result)) {
             // $id = key($data);
             // $row[$id] = current($data);
-            $row = $data;
+            $row[] = $data;
         }
         return $row;
     }
