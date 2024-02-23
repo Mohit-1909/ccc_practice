@@ -38,21 +38,21 @@ class Core_Model_Resource_Abstract
         $query = "INSERT INTO {$tablename} ({$columns}) VALUES ({$values})";
         return $query;
     }
-    public function save(Catalog_Model_Product $product)
+    public function save(Core_Model_Abstract $abstract)
     {
-        $data = $product->getData();
+        $data = $abstract->getData();
         // print_r($data);
         if (isset($data[$this->getPrimaryKey()])) {
             unset($data[$this->getPrimaryKey()]);
         }
         $sql = $this->insertSql($this->getTableName(), $data);
         $id = $this->getAdapter()->insert($sql);
-        $product->setId($id);
+        $abstract->setId($id);
         var_dump($id);
     }
-    public function delete(Catalog_Model_Product $product)
+    public function delete(Core_Model_Abstract $abstract)
     {
-        $query = "DELETE FROM {$this->_tableName} WHERE {$this->_primaryKey} = {$product->getId()}";
+        $query = "DELETE FROM {$this->getTableName()} WHERE {$this->getPrimaryKey()} = {$abstract->getId()}";
         return $this->getAdapter()->delete($query);
     }
 
