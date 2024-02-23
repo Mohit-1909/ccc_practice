@@ -60,6 +60,12 @@ class Core_Model_DB_Adapter
     }
     public function update($query)
     {
+        $result = mysqli_query($this->connect(), $query);
+        if (!$result) {
+            echo 'Error:' . mysqli_error($this->connect());
+            exit();
+        }
+        return $result;
     }
     public function delete($query)
     {

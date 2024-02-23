@@ -27,7 +27,7 @@ $data = $this->getProduct();
         <input type="text" value= "<?php echo $data->getLink() ?>" id="link" name="catalog_product[link]">
         
         <label for="category_id">Category ID:</label>
-        <input type="number" value= "<?php echo $data->getCategory() ?>" id="category_id" name="catalog_product[category_id]" >
+        <input type="number" value= "<?php echo $data->getCategoryId() ?>" id="category_id" name="catalog_product[category_id]" >
         
         <label for="price">Price:</label>
         <input type="text" value= "<?php echo $data->getPrice() ?>" id="price" name="catalog_product[price]" >

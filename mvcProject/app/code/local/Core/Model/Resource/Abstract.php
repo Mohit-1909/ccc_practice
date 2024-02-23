@@ -38,17 +38,29 @@ class Core_Model_Resource_Abstract
         $query = "INSERT INTO {$tablename} ({$columns}) VALUES ({$values})";
         return $query;
     }
+    function updateSql($tablename, $data, $primaryKey)
+    {
+        $columns = $where_cond = [];
+        foreach ($data as $col => $val) {
+            $columns[] = "`$col` = '$val'";
+        }
+        $columns = implode(", ", $columns);
+        $where_cond = implode(" AND ", $where_cond);
+        return "UPDATE {$tablename} SET {$columns} WHERE {$this->getPrimaryKey()} = {$primaryKey};";
+    }
     public function save(Core_Model_Abstract $abstract)
     {
         $data = $abstract->getData();
         // print_r($data);
-        if (isset($data[$this->getPrimaryKey()])) {
-            unset($data[$this->getPrimaryKey()]);
+        if ($data[$this->getPrimaryKey()]) {
+            $sql = $this->updateSql($this->getTableName(), $data, $abstract->getId());
+            $id = $this->getAdapter()->update($sql);
+        } else {
+            $sql = $this->insertSql($this->getTableName(), $data);
+            $id = $this->getAdapter()->insert($sql);
+            $abstract->setId($id);
+            var_dump($id);
         }
-        $sql = $this->insertSql($this->getTableName(), $data);
-        $id = $this->getAdapter()->insert($sql);
-        $abstract->setId($id);
-        var_dump($id);
     }
     public function delete(Core_Model_Abstract $abstract)
     {
