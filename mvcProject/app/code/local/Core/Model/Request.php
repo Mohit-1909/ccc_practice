@@ -15,12 +15,21 @@ class Core_Model_Request
         $this->_actionName = isset($requestUri[2]) ? $requestUri[2] : 'index';
         // die();
     }
-    public function getParams($key = '')
+    // public function getParams($key = '')
+    // {
+    //     return ($key == '') ? $_REQUEST
+    //         : (isset($_REQUEST[$key])
+    //             ? $_REQUEST[$key]
+    //             : '');
+    // }
+    public function getParams($key = '', $arg = null)
     {
-        return ($key == '') ? $_REQUEST
+        return ($key == '')
+            ? $_REQUEST
             : (isset($_REQUEST[$key])
                 ? $_REQUEST[$key]
-                : '');
+                : ((!is_null($arg)) ? $arg : '')
+            );
     }
     public function getPostData($key = '')
     {
@@ -70,7 +79,7 @@ class Core_Model_Request
 
     public function getFullControllerClass()
     {
-        $controllerClass = implode('_', [ucfirst($this->_moduleName), 'Controller', ucfirst($this->_controllerName)]);
+        $controllerClass = implode('_', [ucfirst($this->getModuleName()), 'Controller', ucfirst($this->getControllerName())]);
         return $controllerClass;
     }
 

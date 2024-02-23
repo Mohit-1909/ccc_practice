@@ -1,117 +1,55 @@
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<?php
+$data = $this->getProduct();
+?>
+<div class="container">
+    <h2>Add New Product</h2>
+    <form action="<?php echo $this->getUrl('admin/catalog_product/save') ?>" method="POST">
+        <input type="hidden" value= "<?php echo $data->getProductId() ?>" id="sku" name="catalog_product[product_id]" >
+        <label for="sku">SKU:</label>
+        <input type="text" value= "<?php echo $data->getSku() ?>" id="sku" name="catalog_product[sku]" >
 
-        .container {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-
-        form {
-            margin-top: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #666;
-        }
-
-        input[type="text"],
-        input[type="number"],
-        textarea {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-
-        textarea {
-            height: 100px;
-        }
-
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-    </style>
-
-    <div class="container">
-        <h2>Add New Product</h2>
-        <form action="<?php echo $this->getUrl('admin/catalog_product/save') ?>" method="POST">
-
-            <input type="hidden" id="sku" name="catalog_product[product_id]" >
-            <label for="sku">SKU:</label>
-            <input type="text" id="sku" name="catalog_product[sku]" >
-
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="catalog_product[name]" >
-
-            <label for="color">Color:</label>
-            <input type="text" id="color" name="catalog_product[color]">
-
-            <label for="size">Size:</label>
-            <input type="text" id="size" name="catalog_product[size]">
-
-            <label for="description">Description:</label>
-            <textarea id="description" name="catalog_product[description]"></textarea>
-
-            <label for="image_link">Image Link:</label>
-            <input type="text" id="image_link" name="catalog_product[image_link]">
-
-            <label for="link">Link:</label>
-            <input type="text" id="link" name="catalog_product[link]">
-
-            <label for="category_id">Category ID:</label>
-            <input type="number" id="category_id" name="catalog_product[category_id]" >
-
-            <label for="price">Price:</label>
-            <input type="text" id="price" name="catalog_product[price]" >
-
-            <label for="mfr_cost">Manufacturer Cost:</label>
-            <input type="text" id="mfr_cost" name="catalog_product[mfr_cost]">
-
-            <label for="shipping_cost">Shipping Cost:</label>
-            <input type="text" id="shipping_cost" name="catalog_product[shipping_cost]">
-
-            <label for="total_cost">Total Cost:</label>
-            <input type="text" id="total_cost" name="catalog_product[total_cost]">
-
-            <label for="margin_percentage">Margin Percentage:</label>
-            <input type="text" id="margin_percentage" name="catalog_product[margin_percentage]">
-
-            <label for="min_price">Minimum Price:</label>
-            <input type="text" id="min_price" name="catalog_product[min_price]">
-
-            <label for="status">Status:</label>
-            <input type="number" id="status" name="catalog_product[status]" >
-
-            <input type="submit" value="Submit">
-        </form>
-    </div>
+        <label for="name">Name:</label>
+        <input type="text" value= "<?php echo $data->getName() ?>" id="name" name="catalog_product[name]" >
+        
+        <label for="color">Color:</label>
+        <input type="text" value= "<?php echo $data->getColor() ?>" id="color" name="catalog_product[color]">
+        
+        <label for="size">Size:</label>
+        <input type="text" value= "<?php echo $data->getSize() ?>" id="size" name="catalog_product[size]">
+        
+        <label for="description">Description:</label>
+        <textarea id="description" name="catalog_product[description]"><?php echo $data->getDescription() ?> </textarea>
+        
+        <label for="image_link">Image Link:</label>
+        <input type="text" value= "<?php echo $data->getImageLink() ?>" id="image_link" name="catalog_product[image_link]">
+        
+        <label for="link">Link:</label>
+        <input type="text" value= "<?php echo $data->getLink() ?>" id="link" name="catalog_product[link]">
+        
+        <label for="category_id">Category ID:</label>
+        <input type="number" value= "<?php echo $data->getCategory() ?>" id="category_id" name="catalog_product[category_id]" >
+        
+        <label for="price">Price:</label>
+        <input type="text" value= "<?php echo $data->getPrice() ?>" id="price" name="catalog_product[price]" >
+        
+        <label for="mfr_cost">Manufacturer Cost:</label>
+        <input type="text" value= "<?php echo $data->getMfrCost() ?>" id="mfr_cost" name="catalog_product[mfr_cost]">
+        
+        <label for="shipping_cost">Shipping Cost:</label>
+        <input type="text" value= "<?php echo $data->getShippingCost() ?>" id="shipping_cost" name="catalog_product[shipping_cost]">
+        
+        <label for="total_cost">Total Cost:</label>
+        <input type="text" value= "<?php echo $data->getTotalCost() ?>" id="total_cost" name="catalog_product[total_cost]">
+        
+        <label for="margin_percentage">Margin Percentage:</label>
+        <input type="text" value= "<?php echo $data->getMarginPercentage() ?>" id="margin_percentage" name="catalog_product[margin_percentage]">
+        
+        <label for="min_price">Minimum Price:</label>
+        <input type="text" value= "<?php echo $data->getMinPrice() ?>" id="min_price" name="catalog_product[min_price]">
+        
+        <label for="status">Status:</label>
+        <input type="number" value= "<?php echo $data->getStatus() ?>" id="status" name="catalog_product[status]" >
+        
+        <input type="submit" value="Submit">
+    </form>
+</div>
