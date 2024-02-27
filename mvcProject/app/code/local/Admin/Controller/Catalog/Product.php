@@ -49,7 +49,7 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Front_Action
         $productId = $this->getRequest()->getParams('product_id');
         Mage::getModel('catalog/product')
             ->load($productId)
-            ->setId($productId)
+            // ->setId($productId)
             ->delete();
     }
 

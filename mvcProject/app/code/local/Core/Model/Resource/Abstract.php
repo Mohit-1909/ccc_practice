@@ -14,12 +14,14 @@ class Core_Model_Resource_Abstract
     {
         return $this->_primaryKey;
     }
-
     public function getTableName()
     {
         return $this->_tableName;
     }
-
+    public function getAdapter()
+    {
+        return new Core_Model_DB_Adapter();
+    }
     public function load($id, $column = null)
     {
         $sql = "SELECT * FROM  {$this->_tableName} WHERE `{$this->_primaryKey}`=$id LIMIT 1";
@@ -71,10 +73,5 @@ class Core_Model_Resource_Abstract
     {
         $query = "DELETE FROM {$this->getTableName()} WHERE {$this->getPrimaryKey()} = {$abstract->getId()}";
         return $this->getAdapter()->delete($query);
-    }
-
-    public function getAdapter()
-    {
-        return new Core_Model_DB_Adapter();
     }
 }

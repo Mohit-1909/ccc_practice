@@ -17,9 +17,13 @@ class Core_Model_Abstract
     }
     public function setResourceClass($resourceClass)
     {
+        $this->_resourceClass = $resourceClass;
+        return $this;
     }
     public function setCollectionClass($collectionClass)
     {
+        $this->_collectionClass = $collectionClass;
+        return $this;
     }
     public function setId($id)
     {
@@ -28,8 +32,9 @@ class Core_Model_Abstract
     }
     public function getId()
     {
-        $id = $this->_data[$this->getResource()->getPrimaryKey()];
-        return $id;
+        /*$id =*/
+        return $this->_data[$this->getResource()->getPrimaryKey()];
+        // return $id;
     }
     public function getResource()
     {
@@ -40,6 +45,11 @@ class Core_Model_Abstract
     }
     public function getCollection()
     {
+        $collection = new $this->_collectionClass;
+        $collection->setResource($this->getResource());
+        $collection->setModel(get_class($this));
+        $collection->select();
+        return $collection;
     }
     // public function getPrimaryKey()
     // {
@@ -50,11 +60,6 @@ class Core_Model_Abstract
     public function load($id, $column = null)
     {
         $this->_data = $this->getResource()->load($id, $column);
-        return $this;
-    }
-    public function loadAll()
-    {
-        $this->_data = $this->getResource()->loadAll();
         return $this;
     }
     public function camelCase2UnderScore($str, $separator = "_")

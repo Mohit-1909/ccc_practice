@@ -9,7 +9,7 @@ class Catalog_Block_Admin_Product_List extends Core_Block_Template
 
     public function getProductList()
     {
-        return Mage::getModel('catalog/product')
-            ->loadAll();
+        // return Mage::getModel('catalog/product')
+        //     ->loadAll();
     }
 }

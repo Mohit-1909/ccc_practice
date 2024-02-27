@@ -1,49 +1,58 @@
 <?php
-$data = $this->getProductList()->getData();
-// echo "<pre>";
-// print_r($data);
+$productModel = Mage::getModel("catalog/product")->getCollection();
+// $productModel->addFieldToFilter('name', 'abc');
+// $productModel->addFieldToFilter('product_id', ['in'=>[52,53,54]]);
+// $productModel->addFieldToFilter('sku', ['like'=>'%abc']);
+// foreach ($productModel->getData() as $product) {
+//     // echo get_class($product);
+//     echo "<pre>";
+//     print_r($product);
+//     echo "<br>";
+// }
 ?>
 
-<div>
-    <h2>Catalog Product Fields</h2>
+<div class="list">
+    <h2>Product List</h2>
     <table>
-        <tr>
-            <th>product_id</th>
-            <th>sku</th>
-            <th>name</th>
-            <th>color</th>
-            <th>size</th>
-            <th>description</th>
-            <th>image_link</th>
-            <th>link</th>
-            <th>category_id</th>
-            <th>price</th>
-            <th>mfr_cost</th>
-            <th>shipping_cost</th>
-            <th>total_cost</th>
-            <th>margin_percentage</th>
-            <th>min_price</th>
-            <th>status</th>
-        </tr>
-    <?php foreach ($data as $_data): ?>
-        <tr>
-            <td class="row_data"><?php echo $_data['product_id']; ?></td>
-            <td class="row_data"><?php echo $_data['sku']; ?></td>
-            <td class="row_data"><?php echo $_data['name'] ?></td>
-            <td class="row_data"><?php echo $_data['color'] ?></td>
-            <td class="row_data"><?php echo $_data['size'] ?></td>
-            <td class="row_data"><?php echo $_data['description'] ?></td>
-            <td class="row_data"><?php echo $_data['image_link'] ?></td>
-            <td class="row_data"><?php echo $_data['link'] ?></td>
-            <td class="row_data"><?php echo $_data['category_id'] ?></td>
-            <td class="row_data"><?php echo $_data['price'] ?></td>
-            <td class="row_data"><?php echo $_data['mfr_cost'] ?></td>
-            <td class="row_data"><?php echo $_data['shipping_cost'] ?></td>
-            <td class="row_data"><?php echo $_data['total_cost'] ?></td>
-            <td class="row_data"><?php echo $_data['margin_percentage'] ?></td>
-            <td class="row_data"><?php echo $_data['min_price'] ?></td>
-            <td class="row_data"><?php echo $_data['status'] ?></td>
-        </tr>
-    <?php endforeach; ?>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>SKU</th>
+                <th>Status</th>
+                <th>Color</th>
+                <th colspan="2">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($productModel->getData() as $_product): ?>
+                        <tr>
+                            <td>
+                                <?php echo $_product->getName() ?>
+                            </td>
+                            <td>
+                                <?php echo $_product->getSku() ?>
+                            </td>
+                            <td>
+                                <?php echo $_product->getStatus() ?>
+                            </td>
+                            <td>
+                                <?php echo $_product->getColor() ?>
+                            </td>
+                            <td>
+                            <form action="<?php echo $this->getUrl('admin/catalog_product/delete') ?>" method="post" style="display: inline;">
+                                <input type="hidden" name="product_id" value="<?php echo $_product->getId() ?>">
+                                <button type="submit" class="delete-button">Delete</button>
+                            </form>
+                            </td>
+                            <td>
+                                <form action="<?php echo $this->getUrl('admin/catalog_product/form') ?>" method="get" style="display: inline;">
+                                    <input type="hidden" name="product_id" value="<?php echo $_product->getId() ?>">
+                                    <button type="submit" class="update-button">Update</button>
+                                </form>
+                            </td>
+
+                        </tr>
+            <?php endforeach; ?>
+        </tbody>
     </table>
 </div>

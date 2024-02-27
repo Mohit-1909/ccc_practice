@@ -3,6 +3,14 @@
 class Core_Controller_Front_Action
 {
     protected $_layout = null;
+    public function __construct()
+    {
+        $layout = $this->getLayout();
+        $layout->getChild('head')
+            ->addCss('main.css')
+            ->addCss('header.css')
+            ->addCss('footer.css');
+    }
     public function getLayout()
     {
         if (is_null($this->_layout)) {
