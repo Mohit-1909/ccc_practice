@@ -32,9 +32,9 @@ echo "<script>var status = '{$productData->getStatus()}'</script>";
                 <label for="category">Category:</label>
                 <select name="catalog_product[category_id]" id="category">
                     <?php foreach ($categoryData as $_category): ?>
-                            <option value=<?php echo $_category->getCategoryId() ?> class="category">
-                                <?php echo $_category->getCategoryName() ?>
-                            </option>;
+                        <option value=<?php echo $_category->getCategoryId() ?> class="category">
+                            <?php echo $_category->getCategoryName() ?>
+                        </option>;
                     <?php endforeach; ?>
 
                 </select>
