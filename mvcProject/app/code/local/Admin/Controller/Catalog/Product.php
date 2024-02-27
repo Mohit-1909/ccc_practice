@@ -6,8 +6,6 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Front_Action
     {
         $layout = $this->getLayout();
         $layout->getChild('head')
-            ->addCss('header.css')
-            ->addCss('footer.css')
             ->addCss('product/list.css')
             ->addCss('product/form.css');
     }
