@@ -6,4 +6,10 @@ class Catalog_Block_Admin_Category_List extends Core_Block_Template
     {
         $this->setTemplate('catalog/admin/category/list.phtml');
     }
+
+    public function getCategoryList()
+    {
+        $categoryModel = Mage::getModel("catalog/category")->getCollection();
+        return $categoryModel->getData();
+    }
 }

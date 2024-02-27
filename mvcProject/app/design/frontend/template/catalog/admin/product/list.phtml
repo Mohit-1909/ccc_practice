@@ -1,5 +1,5 @@
 <?php
-$productModel = Mage::getModel("catalog/product")->getCollection();
+// $productModel = Mage::getModel("catalog/product")->getCollection();
 // $productModel->addFieldToFilter('name', 'abc');
 // $productModel->addFieldToFilter('product_id', ['in'=>[52,53,54]]);
 // $productModel->addFieldToFilter('sku', ['like'=>'%abc']);
@@ -10,7 +10,6 @@ $productModel = Mage::getModel("catalog/product")->getCollection();
 //     echo "<br>";
 // }
 ?>
-
 <div class="list">
     <h2>Product List</h2>
     <table>
@@ -24,34 +23,33 @@ $productModel = Mage::getModel("catalog/product")->getCollection();
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($productModel->getData() as $_product): ?>
-                        <tr>
-                            <td>
-                                <?php echo $_product->getName() ?>
-                            </td>
-                            <td>
-                                <?php echo $_product->getSku() ?>
-                            </td>
-                            <td>
-                                <?php echo $_product->getStatus() ?>
-                            </td>
-                            <td>
-                                <?php echo $_product->getColor() ?>
-                            </td>
-                            <td>
-                            <form action="<?php echo $this->getUrl('admin/catalog_product/delete') ?>" method="post" style="display: inline;">
-                                <input type="hidden" name="product_id" value="<?php echo $_product->getId() ?>">
-                                <button type="submit" class="delete-button">Delete</button>
-                            </form>
-                            </td>
-                            <td>
-                                <form action="<?php echo $this->getUrl('admin/catalog_product/form') ?>" method="get" style="display: inline;">
-                                    <input type="hidden" name="product_id" value="<?php echo $_product->getId() ?>">
-                                    <button type="submit" class="update-button">Update</button>
-                                </form>
-                            </td>
-
-                        </tr>
+            <?php foreach ($this->getProductList() as $_product): ?>
+                <tr>
+                   <td>
+                       <?php echo $_product->getName() ?>
+                   </td>
+                   <td>
+                       <?php echo $_product->getSku() ?>
+                   </td>
+                   <td>
+                       <?php echo $_product->getStatus() ?>
+                   </td>
+                   <td>
+                       <?php echo $_product->getColor() ?>
+                   </td>
+                   <td>
+                   <form action="<?php echo $this->getUrl('admin/catalog_product/delete') ?>" method="post" style="display: inline;">
+                       <input type="hidden" name="product_id" value="<?php echo $_product->getId() ?>">
+                       <button type="submit" class="delete-button">Delete</button>
+                   </form>
+                   </td>
+                   <td>
+                       <form action="<?php echo $this->getUrl('admin/catalog_product/form') ?>" method="get" style="display: inline;">
+                           <input type="hidden" name="product_id" value="<?php echo $_product->getId() ?>">
+                           <button type="submit" class="update-button">Update</button>
+                       </form>
+                   </td>
+                </tr>
             <?php endforeach; ?>
         </tbody>
     </table>

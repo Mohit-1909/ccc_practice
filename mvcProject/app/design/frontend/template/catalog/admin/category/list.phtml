@@ -1,5 +1,5 @@
 <?php
-$categoryModel = Mage::getModel("catalog/category")->getCollection();
+// $categoryModel = Mage::getModel("catalog/category")->getCollection();
 ?>
 
 <div class="list">
@@ -13,21 +13,21 @@ $categoryModel = Mage::getModel("catalog/category")->getCollection();
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($categoryModel->getData() as $_category): ?>
-                    <tr>
-                        <td>
-                        <?php echo $_category->getCategoryName() ?>
-                    </td>
-                    <td>
-                        <?php echo $_category->getStatus() ?>
-                    </td>
-                    <td><a
-                            href="<?php echo $this->getUrl("admin/catalog_category/delete?category_id={$_category->getId()}") ?>">Delete</a>
-                    </td>
-                    <td><a
-                            href="<?php echo $this->getUrl("admin/catalog_category/form?category_id={$_category->getId()}") ?>">Update</a>
-                    </td>
-                </tr>
+            <?php foreach ($this->getCategoryList() as $_category): ?>
+                                <tr>
+                                    <td>
+                                    <?php echo $_category->getCategoryName() ?>
+                                </td>
+                                <td>
+                                    <?php echo $_category->getStatus() ?>
+                                </td>
+                                <td><a
+                                        href="<?php echo $this->getUrl("admin/catalog_category/delete?category_id={$_category->getId()}") ?>">Delete</a>
+                                </td>
+                                <td><a
+                                        href="<?php echo $this->getUrl("admin/catalog_category/form?category_id={$_category->getId()}") ?>">Update</a>
+                                </td>
+                            </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
