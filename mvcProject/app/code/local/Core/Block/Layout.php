@@ -22,6 +22,9 @@ class Core_Block_Layout extends Core_Block_Template
         $content = $this->createBlock('page/content');
         $this->addChild("content", $content);
 
+        // $calc = $this->createBlock('calculator/calc');
+        // $this->addChild("calculator", $calc);
+
         $messages = $this->createBlock('core/template');
         $messages->setTemplate('core/messages.phtml');
         $this->addChild("messages", $messages);

@@ -9,22 +9,13 @@ class Core_Model_Request
         //     $requestUri = explode("/", $requestUri);
         // } if you dont use array filter than you have to use this condition
         $requestUri = array_filter(explode("/", $requestUri));
-        // print_r($requestUri);
         $this->_moduleName = isset($requestUri[0]) ? $requestUri[0] : 'page';
         $this->_controllerName = isset($requestUri[1]) ? $requestUri[1] : 'index';
         $this->_actionName = isset($requestUri[2]) ? $requestUri[2] : 'index';
-        // die();
     }
-    // public function getParams($key = '')
-    // {
-    //     return ($key == '') ? $_REQUEST
-    //         : (isset($_REQUEST[$key])
-    //             ? $_REQUEST[$key]
-    //             : '');
-    // }
     public function getParams($key = '', $arg = null)
     {
-        return ($key == '')
+        return($key == '')
             ? $_REQUEST
             : (isset($_REQUEST[$key])
                 ? $_REQUEST[$key]
@@ -33,7 +24,7 @@ class Core_Model_Request
     }
     public function getPostData($key = '')
     {
-        return ($key == '')
+        return($key == '')
             ? $_POST
             : (isset($_POST[$key])
                 ? $_POST[$key]
@@ -41,7 +32,7 @@ class Core_Model_Request
     }
     public function getQueryData($key = '')
     {
-        return ($key == '')
+        return($key == '')
             ? $_GET
             : (isset($_GET[$key])
                 ? $_GET[$key]
@@ -54,7 +45,6 @@ class Core_Model_Request
         }
         return false;
     }
-
     public function getRequestUri()
     {
         $url = $_SERVER['REQUEST_URI'];
@@ -63,7 +53,6 @@ class Core_Model_Request
             $url = stristr($url, '?', true);
         return $url;
     }
-
     public function getModuleName()
     {
         return $this->_moduleName;
@@ -76,7 +65,6 @@ class Core_Model_Request
     {
         return $this->_actionName;
     }
-
     public function getFullControllerClass()
     {
         $controllerClass = implode('_', [ucfirst($this->getModuleName()), 'Controller', ucfirst($this->getControllerName())]);

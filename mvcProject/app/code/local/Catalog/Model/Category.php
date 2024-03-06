@@ -15,9 +15,4 @@ class Catalog_Model_Category extends Core_Model_Abstract
         ];
         return isset($this->_data['status']) ? $embeddings[$this->_data['status']] : '';
     }
-
-    public function getCategoryIdName()
-    {
-
-    }
 }

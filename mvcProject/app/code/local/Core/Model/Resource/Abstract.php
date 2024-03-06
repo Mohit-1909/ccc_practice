@@ -27,11 +27,6 @@ class Core_Model_Resource_Abstract
         $sql = "SELECT * FROM  {$this->_tableName} WHERE `{$this->_primaryKey}`=$id LIMIT 1";
         return $this->getAdapter()->fetchRow($sql);
     }
-    public function loadAll()
-    {
-        $sql = "SELECT * FROM  {$this->_tableName}";
-        return $this->getAdapter()->fetchRow($sql);
-    }
     public function insertSql($tablename, $data)
     {
 

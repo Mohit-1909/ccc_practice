@@ -32,15 +32,10 @@ class Core_Model_Abstract
     }
     public function getId()
     {
-        /*$id =*/
         return $this->_data[$this->getResource()->getPrimaryKey()];
-        // return $id;
     }
     public function getResource()
     {
-        // $modelClass = get_class($this);
-        // $class = substr($modelClass, 0, strpos($modelClass, '_Model_') + 6) . '_Resource_' . substr($modelClass, strpos($modelClass, '_Model_') + 7);
-        // return new $class;
         return new $this->_resourceClass();
     }
     public function getCollection()

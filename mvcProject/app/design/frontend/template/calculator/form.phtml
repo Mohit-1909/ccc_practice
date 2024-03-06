@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Calculator</title>
+    <style>
+        .container {
+            margin: 20px auto;
+            width: 300px;
+            text-align: center;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Number Calculator</h2>
+        <!-- action="<?php echo $this->getUrl('customer/account/save') ?>" -->
+        <form action="#" method="POST">
+            <input type="text" name="username" placeholder="Enter your name" required><br>
+            <input type="number" name="number1" placeholder="Enter a number" required><br>
+            <select name="operator">
+                <option value="add">+</option>
+                <option value="subtract">-</option>
+                <option value="multiply">*</option>
+                <option value="divide">/</option>
+            </select><br>
+            <input type="number" name="number2" placeholder="Enter a number" required><br>
+            <input type="submit" value="Equal to">
+        </form>
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Fetching user inputs
+            // print_r($_POST);
+            $username = $_POST["username"];
+            $operator = $_POST["operator"];
+            $number1 = floatval($_POST["number1"]);
+            $number2 = floatval($_POST["number2"]);
+
+            // Calculating the result based on the selected operator
+            $result = null;
+            switch ($operator) {
+                case "add":
+                    $result = $number1 + $number2;
+                    break;
+                case "subtract":
+                    $result = $number1 - $number2;
+                    break;
+                case "multiply":
+                    $result = $number1 * $number2;
+                    break;
+                case "divide":
+                    $result = $number1 / $number2;
+                    break;
+                default:
+                    $result = "Invalid operator";
+            }
+
+            // Displaying the result
+            echo "$username! The result is: $number1 $operator $number2 equals $result.";
+        }
+        ?>
+    </div>
+</body>
+</html>

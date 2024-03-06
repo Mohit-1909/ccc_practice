@@ -2,13 +2,13 @@
 
 class Admin_Controller_Catalog_Category extends Core_Controller_Front_Action
 {
+    protected $_allowedAction = [];
     public function includeCss()
     {
         $layout = $this->getLayout();
         $layout->getChild('head')
-            ->addCss('header.css')
-            ->addCss('footer.css')
-            ->addCss('category/form.css');
+            ->addCss('category/form.css')
+            ->addJs('category/form.js');
     }
     public function formAction()
     {
@@ -39,11 +39,11 @@ class Admin_Controller_Catalog_Category extends Core_Controller_Front_Action
 
     public function saveAction()
     {
-        echo "<pre>";
+        // echo "<pre>";
         $data = $this->getRequest()->getParams('catalog_category');
-        $category = Mage::getModel('catalog/category')
-            ->setData($data);
-        $category->save();
+        Mage::getModel('catalog/category')
+            ->setData($data)
+            ->save();
     }
     public function deleteAction()
     {
