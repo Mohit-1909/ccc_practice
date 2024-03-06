@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -31,7 +31,6 @@
 <body>
     <div class="container">
         <h2>Number Calculator</h2>
-        <!-- action="<?php echo $this->getUrl('customer/account/save') ?>" -->
         <form action="#" method="POST">
             <input type="text" name="username" placeholder="Enter your name" required><br>
             <input type="number" name="number1" placeholder="Enter a number" required><br>
@@ -76,6 +75,65 @@
             echo "$username! The result is: $number1 $operator $number2 equals $result.";
         }
         ?>
+    </div>
+</body>
+</html> -->
+
+<?php
+$options = $this->getOptions();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Calculator</title>
+    <style>
+        .container {
+            margin: 20px auto;
+            width: 300px;
+            text-align: center;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Number Calculator</h2>
+        <form action="<?php echo $this->getUrl('calculator/calculator/save') ?>" method="POST">
+            <input type="hidden" name="ccc_calculator[id]"><br>
+            <input type="text" name="ccc_calculator[user_name]" placeholder="Enter your name" required><br>
+            <input type="number" name="ccc_calculator[from]" placeholder="Enter a number" required><br>
+            <select name="ccc_calculator[operator]">
+                <!-- <option value="add">+</option>
+                <option value="minus">-</option>
+                <option value="multiply">*</option>
+                <option value="divide">/</option>
+                <option value="percentage">%</option>
+            </select><br> -->
+            <?php foreach ($options as $key => $value) { ?>
+                                    <option value = "<?php $key ?>" ><?php echo $value ?></option>
+           <?php } ?>
+            </select><br>
+            <input type="number" name="ccc_calculator[to]" placeholder="Enter a number" required><br>
+            <input type="submit" value="Equal to">
+        </form>
     </div>
 </body>
 </html>

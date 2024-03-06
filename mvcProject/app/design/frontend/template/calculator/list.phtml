@@ -1,0 +1,40 @@
+<div class="list">
+    <h2>Result List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>From</th>
+                <th>To</th>
+                <th>User Name</th>
+                <th>Operator</th>
+                <th>Result</th>
+                <th colspan="2">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($this->getDataList() as $_product): ?>
+                <tr>
+                    <td>
+                        <?php echo $_product->getId() ?>
+                    </td>
+                    <td>
+                        <?php echo $_product->getFrom() ?>
+                    </td>
+                    <td>
+                        <?php echo $_product->getTo() ?>
+                    </td>
+                    <td>
+                        <?php echo $_product->getUserName() ?>
+                    </td>
+                    <td>
+                        <?php echo $_product->getOperator() ?>
+                    </td>
+                    <td>
+                        <?php echo $_product->getResult() ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>

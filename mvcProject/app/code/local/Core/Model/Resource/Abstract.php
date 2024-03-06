@@ -53,7 +53,6 @@ class Core_Model_Resource_Abstract
     public function save(Core_Model_Abstract $abstract)
     {
         $data = $abstract->getData();
-        // print_r($data);
         if ($data[$this->getPrimaryKey()]) {
             $sql = $this->updateSql($this->getTableName(), $data, $abstract->getId());
             $id = $this->getAdapter()->update($sql);
