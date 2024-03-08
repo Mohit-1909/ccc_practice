@@ -9,7 +9,7 @@ class Sales_Model_Quote extends Core_Model_Abstract
     }
     public function initQuote()
     {
-        $quoteId = Mage::getSingleton('core/session')->get('quote_id');
+        $quoteId = Mage::getSingleton('core/session')->get('quote_id', 0);
         if (!$quoteId) {
             $quote = Mage::getModel('sales/quote')
                 ->setData(['tax_percent' => 0, 'grand_total' => 0])

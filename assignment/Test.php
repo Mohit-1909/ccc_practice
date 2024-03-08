@@ -2,8 +2,8 @@
 
 $array = [3, 5, 7, 1, 9];
 sort($array);
-echo  minSum($array) . "\n";
-echo  maxSum($array) . "\n";
+echo minSum($array) . "\n";
+echo maxSum($array) . "\n";
 
 function minSum($array)
 {

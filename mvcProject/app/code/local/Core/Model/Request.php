@@ -38,6 +38,14 @@ class Core_Model_Request
                 ? $_GET[$key]
                 : '');
     }
+    public function getFileData($key = '')
+    {
+        return($key == '')
+            ? $_FILES
+            : (isset($_FILES[$key])
+                ? $_FILES[$key]
+                : '');
+    }
     public function isPost(): bool
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -70,5 +78,6 @@ class Core_Model_Request
         $controllerClass = implode('_', [ucfirst($this->getModuleName()), 'Controller', ucfirst($this->getControllerName())]);
         return $controllerClass;
     }
+
 
 }

@@ -14,10 +14,12 @@ class Core_Model_Session
         }
         return false;
     }
-    public function get($key)
+    public function get($key, $args = null)
     {
         if (array_key_exists($key, $_SESSION)) {
             return $_SESSION[$key];
+        } elseif (!is_null($args)) {
+            return $args;
         }
         return false;
     }
