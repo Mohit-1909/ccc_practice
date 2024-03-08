@@ -10,6 +10,10 @@ class Calculator_Model_Product extends Core_Model_Abstract
 
     public function _beforeSave()
     {
+        // echo 123;
+        // echo "<pre>";
+        // var_dump($this);
+        // die();
         $result = null;
         switch ($this->getOperator()) {
             case "add":

@@ -128,9 +128,19 @@ $options = $this->getOptions();
                 <option value="percentage">%</option>
             </select><br> -->
             <?php foreach ($options as $key => $value) { ?>
-                                    <option value = "<?php $key ?>" ><?php echo $value ?></option>
+                        <option value = "<?php echo $key ?>" ><?php echo $value ?></option>
            <?php } ?>
-            </select><br>
+           </select><br>
+           <!-- <div>
+                    <select name="ccc_calculator[operator]">
+                        <?php for ($i = 1; $i <= 20; $i++): ?>
+                                        <option value="<?php echo $i ?>" class="term">
+                                            <?php echo $i; ?>
+                                        </option>;
+                        <?php endfor; ?>
+                    </select>
+                </div> -->
+            
             <input type="number" name="ccc_calculator[to]" placeholder="Enter a number" required><br>
             <input type="submit" value="Equal to">
         </form>

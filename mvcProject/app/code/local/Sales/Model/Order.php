@@ -1,5 +1,5 @@
-<?php 
-    class Sales_Model_Order{
-        
-    }
-?>
+<?php
+class Sales_Model_Order
+{
+
+}

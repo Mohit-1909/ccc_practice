@@ -68,10 +68,14 @@ class Core_Model_Resource_Collection_Abstract
             $this->_data[] = $modelObj->setData($row);
         }
     }
-
     public function getData()
     {
         $this->load();
         return $this->_data;
+    }
+    public function getFirstItem()
+    {
+        $this->load();
+        return isset($this->_data[0]) ? $this->_data[0] : null;
     }
 }

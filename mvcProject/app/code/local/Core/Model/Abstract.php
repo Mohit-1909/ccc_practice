@@ -100,6 +100,7 @@ class Core_Model_Abstract
     }
     public function save()
     {
+        // print_r($this->getOperator());
         $this->_beforeSave();
         $this->getResource()->save($this);
         return $this;

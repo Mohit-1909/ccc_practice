@@ -1,8 +1,8 @@
 <?php
 
-class Admin_Controller_Catalog_Product extends Core_Controller_Front_Action
+class Admin_Controller_Catalog_Product extends Core_Controller_Admin_Action
 {
-    protected $_allowedAction = [];
+    protected $_allowedAction = ['form'];
     // public function includeCss()
     // {
     //     $layout = $this->getLayout();
