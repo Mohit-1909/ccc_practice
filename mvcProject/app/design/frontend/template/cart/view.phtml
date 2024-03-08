@@ -6,7 +6,6 @@
                 <input type="hidden" name="item_id" value="<?php echo $quoteItem->getItemId() ?>">
                 <input type="hidden" name="sales_quote[product_id]" value="<?php echo $quoteItem->getProductId() ?>">
                 <input type="hidden" name="sales_quote[item_id]" value="<?php echo $quoteItem->getItemId() ?>">
-
                 <div class="cart-item">
                     <img src=<?php echo $this->getUrl('media/product/sample.jpg') ?> alt="Product Img">
                     <div class="item-details">
@@ -21,7 +20,7 @@
                             </div>
                             <div>
                                 <label for="qty">Quantity:</label>
-                                <input type="number" name="sales_quote[qty]" value="<?php echo $quoteItem->getQty() ?>"
+                                <input type="number" min='1' name="sales_quote[qty]" value="<?php echo $quoteItem->getQty() ?>"
                                     id="qty">
                             </div>
                         </div>

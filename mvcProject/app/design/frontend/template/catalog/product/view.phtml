@@ -1,3 +1,32 @@
+<!-- <?php
+// $_product = $this->getSingleProduct();
+?>
+<form action="<?php #echo $this->getUrl('sales/quote/add')   ?>" method="post">
+    <div class="product-page">
+        <div class="product-image">
+            <img src="product.jpg" alt="Product">
+        </div>
+        <div class="product-info">
+            <h1>
+                <?php #echo $_product->getName()   ?>
+            </h1>
+            <p>
+                <?php #echo $_product->getDescription()   ?>
+            </p>
+            <p>
+                <?php #echo "&#8377;" . $_product->getPrice()   ?>
+            </p>
+            <div class="quantity">
+                <label for="quantity">Quantity:</label>
+                <input type="hidden" name="sales_quote[product_id]" value="<?php #echo $_product->getId()   ?>">
+                <input type="hidden" name="sales_quote[price]" value="<?php #echo $_product->getPrice()   ?>">
+                <input type="number" id="quantity" name="sales_quote[qty]" min="1" value="1">
+            </div>
+            <input type="submit" name="submit" value="Add to Cart" class="add-to-cart">
+        </div>
+    </div>
+</form> -->
+
 <table border="1px">
     <tr>
         <th>Product Id</th>
@@ -27,14 +56,14 @@
             <form method="POST" action="<?php echo $this->getUrl('sales/quote/add') ?>">
                 <td>
                     <div class="form">
-                        <?php //$categoryModel = $this->getCategoryForm();                                 ?>
+                        <?php //$categoryModel = $this->getCategoryForm();   ?>
                         <div class="row">
-                            <input type="hidden" name="cart[product_id]" value="<?php echo $product->getProductId(); ?>">
+                            <input type="hidden" name="sales_quote[product_id]" value="<?php echo $product->getProductId(); ?>">
                         </div>
                         <div class="row">
                             <label for="quentity">Quantity : </label>
-                            <input type="text" name="cart[qty]" id="quentity"
-                                value="<?php //echo $product->getQuentity();                                 ?>">
+                            <input type="text" name="sales_quote[qty]" id="quentity"
+                                value="<?php //echo $product->getQuentity();   ?>">
                         </div>
                     </div>
                 </td>

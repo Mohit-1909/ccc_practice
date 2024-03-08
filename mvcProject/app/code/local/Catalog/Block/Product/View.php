@@ -13,7 +13,7 @@ class Catalog_Block_Product_View extends Core_Block_Template
     // } if you want single vastu and not all.
     public function getItem()
     {
-        $id = $this->getRequest()->getParams('id');
+        $id = $this->getRequest()->getParams('product_id');
         if ($id) {
             $list = Mage::getModel("catalog/product")->getCollection()->addFieldToFilter('product_id', $id);
             return $list->getData();
