@@ -6,7 +6,6 @@ class Catalog_Block_Admin_Product_List extends Core_Block_Template
     {
         $this->setTemplate("catalog/admin/product/list.phtml");
     }
-
     public function getProductList()
     {
         return Mage::getModel("catalog/product")

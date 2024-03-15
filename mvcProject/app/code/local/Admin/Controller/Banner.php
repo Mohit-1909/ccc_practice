@@ -19,36 +19,74 @@ class Admin_Controller_Banner extends Core_Controller_Admin_Action
     {
         $bannerData = $this->getRequest()->getPostData('banner');
         $bannerFileData = $this->getRequest()->getFileData('banner');
-        // echo "<pre>";
-        // print_r($bannerData);
-        // print_r($bannerFileData);
+        $bannerFileImage = $bannerFileData['name']['banner_path'];
 
-        $bannerName = $bannerFileData['name']['banner_path'];
-        $bannerData['banner_path'] = $bannerName;
+        if (!empty ($bannerFileImage)) {
+            $bannerData['banner_path'] = $bannerFileImage;
+            $bannerMediaPath = Mage::getBaseDir('media/banner/') . $bannerFileImage;
 
-        $bannerModel = Mage::getModel('banner/banner');
-        $bannerMediaPath = Mage::getBaseDir('media/banner/') . $bannerName;
+            if (!empty ($bannerData['banner_id'])) {
+                $singleBannerData = Mage::getModel('banner/banner')->load($bannerData['banner_id']);
+                unlink(Mage::getBaseDir('media/banner/') . $singleBannerData->getBannerPath());
+            }
 
-        $count = 1;
-        while (file_exists($bannerMediaPath)) {
-            $bannerName = explode(".", $bannerName);
-            $bannerName[0] .= "({$count})";
-            $bannerName = implode(".", $bannerName);
+            if (file_exists($bannerMediaPath)) {
 
-            $bannerData['banner_path'] = $bannerName;
-            $bannerMediaPath = Mage::getBaseDir('media/banner/') . $bannerName;
-            $count++;
+                $pathInfo = pathinfo($bannerMediaPath);
+                $fileExtension = isset ($pathInfo['extension']) ? '.' . $pathInfo['extension'] : '';
+                $counter = 1;
+                while (file_exists($pathInfo['dirname'] . '/' . $pathInfo['filename'] . $counter . $fileExtension)) {
+                    $counter++;
+                }
+                $bannerName = $pathInfo['filename'] . $counter . $fileExtension;
+                $bannerData['banner_path'] = $bannerName;
+                $bannerMediaPath = $pathInfo['dirname'] . '/' . $bannerName;
+            }
+
+            move_uploaded_file(
+                $bannerFileData['tmp_name']['banner_path'],
+                $bannerMediaPath
+            );
+        } else {
+            $bannerData['banner_path'] = $this->getRequest()->getPostData('banner_path');
         }
 
-        move_uploaded_file(
-            $bannerFileData['tmp_name']['banner_path'],
-            $bannerMediaPath
-        );
-        $bannerModel->setData($bannerData)
+        Mage::getModel('banner/banner')->setData($bannerData)
             ->save();
 
         $this->setRedirect('admin/banner/list');
     }
+    // public function saveAction()
+    // {
+    //     $bannerData = $this->getRequest()->getPostData('banner');
+    //     $bannerFileData = $this->getRequest()->getFileData('banner');
+
+    //     $bannerName = $bannerFileData['name']['banner_path'];
+    //     $bannerData['banner_path'] = $bannerName;
+
+    //     $bannerModel = Mage::getModel('banner/banner');
+    //     $bannerMediaPath = Mage::getBaseDir('media/banner/') . $bannerName;
+
+    //     $count = 1;
+    //     while (file_exists($bannerMediaPath)) {
+    //         $bannerName = explode(".", $bannerName);
+    //         $bannerName[0] .= "({$count})";
+    //         $bannerName = implode(".", $bannerName);
+
+    //         $bannerData['banner_path'] = $bannerName;
+    //         $bannerMediaPath = Mage::getBaseDir('media/banner/') . $bannerName;
+    //         $count++;
+    //     }
+
+    //     move_uploaded_file(
+    //         $bannerFileData['tmp_name']['banner_path'],
+    //         $bannerMediaPath
+    //     );
+    //     $bannerModel->setData($bannerData)
+    //         ->save();
+
+    //     $this->setRedirect('admin/banner/list');
+    // }
     public function listAction()
     {
         $layout = $this->getLayout();

@@ -29,25 +29,18 @@ class Customer_Controller_Account extends Core_Controller_Front_Action
     }
     public function saveAction()
     {
-        $registerCredentials = $this->getRequest()->getParams('customer');
-        $checkCustomerExist = Mage::getModel('customer/customer')
-            ->getCollection()
-            ->addFieldToFilter('customer_email', $registerCredentials['customer_email'])
-            ->getData();
-        $address = Mage::getBaseUrl("customer/account");
-        if (count($checkCustomerExist)) {
-            echo "<script>
-                alert('email already exist');
-                location. href= '{$address}/register';
-            </script>";
+        $customerData = $this->getRequest()->getParams('customer');
+
+        $customerModel = Mage::getModel('customer/customer');
+        $customerCollection = $customerModel->getCollection();
+
+        $existingCustomer = $customerCollection->addFieldToFilter('customer_email', $customerData['customer_email'])->getData();
+
+        if (count($existingCustomer)) {
+            $this->setRedirect('customer/account/register');
         } else {
-            $customerAccount = Mage::getModel('customer/customer')
-                ->setData($registerCredentials)->save();
-            echo "<script>
-                alert('Register successfully');
-                location. href= '{$address}/login';
-            </script>";
-            print_r($customerAccount);
+            $customerModel->setData($customerData)->save();
+            $this->setRedirect('customer/account/login');
         }
     }
     public function loginAction()
@@ -88,18 +81,15 @@ class Customer_Controller_Account extends Core_Controller_Front_Action
         $customerId = Mage::getSingleton('core/session')
             ->get('logged_in_customer_id');
 
-        $address = Mage::getBaseUrl('customer/account');
         if ($customerId) {
-            $customerData = Mage::getModel('customer/customer')
-                ->load($customerId);
-
             $layout = $this->getLayout();
             $content = $layout->getChild("content");
 
-            // $dashboard = Mage::getBlock('customer/account_dashboard');
-            // $content->addChild('form', $dashboard);
+            $layout->getChild('head')
+                ->addCss('product/view.css');
 
-            print_r($customerData);
+            $dashboard = Mage::getBlock('customer/account_dashboard');
+            $content->addChild('form', $dashboard);
             $layout->toHtml();
         }
     }

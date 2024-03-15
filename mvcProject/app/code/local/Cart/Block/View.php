@@ -8,21 +8,20 @@ class Cart_Block_View extends Core_Block_Template
     }
     public function getQuoteItems()
     {
-        $quoteId = Mage::getSingleton('core/session')
-            ->get('quote_id');
-
-        return Mage::getModel('sales/quote_item')
-            ->getCollection()
-            ->addFieldToFilter('quote_id', $quoteId)
+        $session = Mage::getSingleton('core/session');
+        $quoteId = $session->get('quote_id') ?? null;
+        $products = Mage::getModel('sales/quote_item')
+            ->getCollection()->addFieldToFilter('quote_id', $quoteId)
             ->getData();
-        ;
+        return $products;
+        // return Mage::getSingleton('sales/quote')->getItemCollection();
     }
     public function getQuote()
     {
-        $quoteId = Mage::getSingleton('core/session')
-            ->get('quote_id');
-        return Mage::getModel('sales/quote')
-            ->load($quoteId);
+        $session = Mage::getSingleton('core/session');
+        $quoteId = $session->get('quote_id') ?? null;
+        $quote = Mage::getSingleton('sales/quote');
+        return $quote->load($quoteId);
     }
     public function getDeleteUrl($id)
     {

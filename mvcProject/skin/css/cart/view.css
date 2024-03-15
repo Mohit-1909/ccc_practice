@@ -2,6 +2,7 @@
     width: 600px;
     margin: 0 auto;
     padding: 20px;
+    text-align: center;
 }
 
 .cart>hr {
@@ -82,4 +83,9 @@
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.empty-cart{
+    color: red;
+    font-size: 22px;
 }

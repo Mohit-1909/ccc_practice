@@ -1,0 +1,170 @@
+<?php $addressData = $this->getCustomerAllAddress();
+?>
+
+<div class="container">
+    <div class="list">
+        <h2>Customer Address List</h2>
+        <div class="list-item">
+            <?php foreach ($addressData as $address): ?>
+                    <div class="address-card" data-json='
+                {
+                    "customer":"<?php echo $address->getCustomerId(); ?>",
+                    "billing_address":"<?php echo $address->getBillingAddress(); ?>",
+                    "billing_city":"<?php echo $address->getBillingCity(); ?>",
+                    "billing_country":"<?php echo $address->getBillingCountry(); ?>",
+                    "billing_phone":"<?php echo $address->getBillingPhone(); ?>",
+                    "billing_region":"<?php echo $address->getBillingRegion(); ?>",
+                    "shipping_address":"<?php echo $address->getShippingAddress(); ?>",
+                    "shipping_city":"<?php echo $address->getShippingCity(); ?>",
+                    "shipping_country":"<?php echo $address->getShippingCountry(); ?>",
+                    "shipping_phone":"<?php echo $address->getShippingPhone(); ?>",
+                    "shipping_region":"<?php echo $address->getShippingRegion(); ?>"
+                }'>
+                        <div>
+                            <h4>Billing Address</h4>
+                            <div class="address-details">
+                                <label>Address</label>
+                                <p>
+                                    <?php echo $address->getBillingAddress() ?>
+                                </p>
+                            </div>
+                            <div class="address-details">
+                                <label>City</label>
+                                <p>
+                                    <?php echo $address->getBillingCity() ?>
+                                </p>
+                            </div>
+                            <div class="address-details">
+                                <label>Country</label>
+                                <p>
+                                    <?php echo $address->getBillingCountry() ?>
+                                </p>
+                            </div>
+                            <div class="address-details">
+                                <label>Phone</label>
+                                <p>
+                                    <?php echo $address->getBillingPhone() ?>
+                                </p>
+                            </div>
+                        </div>
+                        <div>
+                            <h4>Shipping Address</h4>
+                            <div class="address-details">
+                                <label>Address</label>
+                                <p>
+                                    <?php echo $address->getShippingAddress() ?>
+                                </p>
+                            </div>
+                            <div class="address-details">
+                                <label>City</label>
+                                <p>
+                                    <?php echo $address->getShippingCity() ?>
+                                </p>
+                            </div>
+                            <div class="address-details">
+                                <label>Country</label>
+                                <p>
+                                    <?php echo $address->getShippingCountry() ?>
+                                </p>
+                            </div>
+                            <div class="address-details">
+                                <label>Phone</label>
+                                <p>
+                                    <?php echo $address->getShippingPhone() ?>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <div class="form">
+        <h2>Customer Address Form</h2>
+        <form method="POST" action="<?php echo $this->getUrl('sales/quote/saveAddress') ?>">
+            <div>
+                <input type="hidden" value="<?php echo $this->getCustomerFirstAddress()->getCustomerId() ?>" name="customer_address[customer_id]">
+            </div>
+            <div>
+                <input type="hidden" value="<?php echo $this->getCustomerEmail() ?>" name="customer_address[email]">
+            </div>
+            <div>
+                <input type="hidden" value="<?php echo $this->getQuoteId() ?>" name="customer_address[quote_id]">
+            </div>
+
+            <div class="row">
+                <div>
+                    <label for="billing_address">Billing Address:</label>
+                    <input type="text" name="customer_address[billing_address]" id="billing_address">
+                </div>
+                <div>
+                    <label for="shipping_address">Shipping Address:</label>
+                    <input type="text" name="customer_address[shipping_address]" id="shipping_address">
+                </div>
+                <div>
+                    <label for="billing_city">Billing City:</label>
+                    <input type="text" name="customer_address[billing_city]" id="billing_city">
+                </div>
+                <div>
+                    <label for="shipping_city">Shipping City:</label>
+                    <input type="text" name="customer_address[shipping_city]" id="shipping_city">
+                </div>
+                <div>
+                    <label for="billing_region">Billing Region:</label>
+                    <select name="customer_address[billing_region]" id="billing_region">
+                        <?php foreach ($this->getRegions() as $key => $val): ?>
+                                <option value='<?php echo $key ?>' class="billing_region">
+                                    <?php echo $val ?>
+                                </option>;
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div>
+                    <label for="shipping_region">Billing Region:</label>
+                    <select name="customer_address[shipping_region]" id="shipping_region">
+                        <?php foreach ($this->getRegions() as $key => $val): ?>
+                                <option value='<?php echo $key ?>' class="shipping_region">
+                                    <?php echo $val ?>
+                                </option>;
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div>
+                    <label for="billing_country">Billing Country:</label>
+                    <input type="text" name="customer_address[billing_country]" id="billing_country">
+                </div>
+                <div>
+                    <label for="shipping_country">Shipping Country:</label>
+                    <input type="text" name="customer_address[shipping_country]" id="shipping_country">
+                </div>
+                <div>
+                    <label for="billing_phone">Billing Phone:</label>
+                    <input type="text" name="customer_address[billing_phone]" id="billing_phone">
+                </div>
+                <div>
+                    <label for="shipping_phone">Shipping Phone:</label>
+                    <input type="text" name="customer_address[shipping_phone]" id="shipping_phone">
+                </div>
+            </div>
+            <div class="buttons">
+                <button formaction="<?php echo $this->getUrl('customer/address/save') ?>" type="submit" class="sub-button">Save Address Permanently</button>
+                <input type="reset" name="reset" class="sub-button" value="Reset">
+                <input type="submit" name="submit" class="sub-button" value="Submit">
+            </div>
+        </form>
+        <div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('.address-card').each((i, e) => {
+        console.log($(e).attr('data-json'))
+        $(e).click(() => {
+            var _data = JSON.parse($(e).attr('data-json'))
+            for (var key in _data) {
+                if (_data.hasOwnProperty(key)) {
+                    $('#' + key).val(_data[key]);
+                }
+            }
+        });
+    })
+</script>

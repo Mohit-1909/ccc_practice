@@ -29,6 +29,12 @@ class Sales_Model_Quote extends Core_Model_Abstract
             ->getCollection()
             ->addFieldToFilter('quote_id', $this->getId());
     }
+    public function getCustomer()
+    {
+        return Mage::getModel('sales/quote_customer')
+            ->getCollection()
+            ->addFieldToFilter('quote_id', $this->getId())->getFirstItem();
+    }
     protected function _beforeSave()
     {
         $grandTotal = 0;
@@ -50,32 +56,72 @@ class Sales_Model_Quote extends Core_Model_Abstract
                     $this,
                     $quoteData['product_id'],
                     $quoteData['qty'],
-                    isset($quoteData['item_id'])
+                    isset ($quoteData['item_id'])
                     ? $quoteData['item_id']
                     : null
                 );
         }
         $this->save();
     }
-    public function updateProduct($request)
-    {
-        $this->initQuote();
-        $quoteId = $this->getId();
-        if (isset($quoteId)) {
-            Mage::getModel('sales/quote_item')->updateItem($this, $request['product_id'], $request['qty']);
-        }
-        $this->save();
-    }
     public function deleteProduct($itemId)
     {
         $quoteId = Mage::getSingleton('core/session')
-            ->get('quote_id');
+            ->getId();
         $this->load($quoteId);
 
         if ($this->getId()) {
             Mage::getModel('sales/quote_item')->deleteItem($this, $itemId);
         }
         $this->save();
+    }
+    public function addAddress($addressData)
+    {
+        $quoteCustomerId = Mage::getSingleton('core/session')->get('quote_customer_id');
+        $quoteCustomerModel = Mage::getModel('sales/quote_customer');
+        $quoteCustomerModel->setData($addressData);
+        if ($quoteCustomerId) {
+            $quoteCustomerModel->addData('quote_customer_id', $quoteCustomerId);
+            $quoteCustomerModel->save();
+        } else {
+            $id = $quoteCustomerModel->save()->getId();
+            Mage::getSingleton('core/session')->set('quote_customer_id', $id);
+        }
+    }
+    public function convert()
+    {
+        if ($this->getId()) {
+            echo 123;
+            $orderId = Mage::getModel('sales/order')
+                ->setData($this->getData())
+                ->removeData('quote_id')
+                ->removeData('order_id')
+                ->removeData('shipping_id')
+                ->removeData('payment_id')
+                ->save()
+                ->getId();
+
+            $this->addData('order_id', $orderId)->save();
+
+            foreach ($this->getItemCollection() as $item) {
+
+                Mage::getModel('sales/order_item')
+                    ->setData($item->getData())
+                    ->removeData('item_id')
+                    ->removeData('quote_id')
+                    ->addData('order_id', $orderId)
+                    ->save();
+            }
+            if ($this->getCustomer()) {
+                Mage::getModel('sales/order_customer')
+                    ->setData($this->getCustomer()->getData())
+                    ->removeData('quote_customer_id')
+                    ->removeData('quote_id')
+                    ->addData('order_id', $orderId)
+                    ->save();
+            }
+            // Store order id in quote
+            // error when quote_id not in session 
+        }
     }
 }
 

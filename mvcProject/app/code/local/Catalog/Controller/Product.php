@@ -11,8 +11,6 @@ class Catalog_Controller_Product extends Core_Controller_Front_Action
 
         $singleProductView = Mage::getBlock('catalog/product_view');
         $content->addChild('view', $singleProductView);
-        print_r($content);
-
         $layout->toHtml();
     }
 }
