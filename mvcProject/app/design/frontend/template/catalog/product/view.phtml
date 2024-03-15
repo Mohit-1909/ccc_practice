@@ -1,39 +1,39 @@
 <div class="prodcard">
     <?php foreach ($this->getItem() as $product) { ?>
-        <div class="card">
-            <img src="<?php echo $this->getImagePath() . $product->getImageLink();
-            ; ?>" alt="Product Image">
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <td>
-                        <?php echo $product->getName(); ?>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Price</th>
-                    <td>
-                        <?php echo $product->getPrice(); ?>
-                    </td>
-                </tr>
-                <form method="POST" action="<?php echo $this->getUrl('sales/quote/add') ?>">
-                    <td>
-                        <div class="form">
-                            <div class="row">
-                                <input type="hidden" name="sales_quote[product_id]" value="<?php echo $product->getProductId(); ?>">
-                            </div>
-                            <div class="row">
-                                <label for="quantity">Quantity : </label>
-                                <input type="text" name="sales_quote[qty]" id="quentity" </div>
-                            </div>
-                    </td>
-                    <td>
+    <div class="card">
+        <img src="<?php echo $this->getImagePath() . $product->getImageLink();
+        ; ?>" alt="Product Image">
+        <table>
+            <tr>
+                <th>Name</th>
+                <td>
+                    <?php echo $product->getName(); ?>
+                </td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>
+                    <?php echo $product->getPrice(); ?>
+                </td>
+            </tr>
+            <form method="POST" action="<?php echo $this->getUrl('sales/quote/add') ?>">
+                <td>
+                    <div class="form">
                         <div class="row">
-                            <input type="submit" value="AddToCart">
+                            <input type="hidden" name="sales_quote[product_id]" value="<?php echo $product->getProductId(); ?>">
                         </div>
-                    </td>
-                </form>
-            </table>
-        </div>
+                        <div class="row">
+                            <label for="quantity">Quantity : </label>
+                            <input type="text" min="1" value="1" name="sales_quote[qty]" id="quantity">
+                        </div>
+                </td>
+                <td>
+                    <div class="row">
+                        <input type="submit" value="AddToCart">
+                    </div>
+                </td>
+            </form>
+        </table>
+    </div>
     <?php } ?>
 </div>

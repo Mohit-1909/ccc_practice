@@ -6,7 +6,7 @@
         <h2>Customer Address List</h2>
         <div class="list-item">
             <?php foreach ($addressData as $address): ?>
-                    <div class="address-card" data-json='
+                            <div class="address-card" data-json='
                 {
                     "customer":"<?php echo $address->getCustomerId(); ?>",
                     "billing_address":"<?php echo $address->getBillingAddress(); ?>",
@@ -20,61 +20,61 @@
                     "shipping_phone":"<?php echo $address->getShippingPhone(); ?>",
                     "shipping_region":"<?php echo $address->getShippingRegion(); ?>"
                 }'>
-                        <div>
-                            <h4>Billing Address</h4>
-                            <div class="address-details">
-                                <label>Address</label>
-                                <p>
-                                    <?php echo $address->getBillingAddress() ?>
-                                </p>
+                                <div>
+                                    <h4>Billing Address</h4>
+                                    <div class="address-details">
+                                        <label>Address</label>
+                                        <p>
+                                            <?php echo $address->getBillingAddress() ?>
+                                        </p>
+                                    </div>
+                                    <div class="address-details">
+                                        <label>City</label>
+                                        <p>
+                                            <?php echo $address->getBillingCity() ?>
+                                        </p>
+                                    </div>
+                                    <div class="address-details">
+                                        <label>Country</label>
+                                        <p>
+                                            <?php echo $address->getBillingCountry() ?>
+                                        </p>
+                                    </div>
+                                    <div class="address-details">
+                                        <label>Phone</label>
+                                        <p>
+                                            <?php echo $address->getBillingPhone() ?>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4>Shipping Address</h4>
+                                    <div class="address-details">
+                                        <label>Address</label>
+                                        <p>
+                                            <?php echo $address->getShippingAddress() ?>
+                                        </p>
+                                    </div>
+                                    <div class="address-details">
+                                        <label>City</label>
+                                        <p>
+                                            <?php echo $address->getShippingCity() ?>
+                                        </p>
+                                    </div>
+                                    <div class="address-details">
+                                        <label>Country</label>
+                                        <p>
+                                            <?php echo $address->getShippingCountry() ?>
+                                        </p>
+                                    </div>
+                                    <div class="address-details">
+                                        <label>Phone</label>
+                                        <p>
+                                            <?php echo $address->getShippingPhone() ?>
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="address-details">
-                                <label>City</label>
-                                <p>
-                                    <?php echo $address->getBillingCity() ?>
-                                </p>
-                            </div>
-                            <div class="address-details">
-                                <label>Country</label>
-                                <p>
-                                    <?php echo $address->getBillingCountry() ?>
-                                </p>
-                            </div>
-                            <div class="address-details">
-                                <label>Phone</label>
-                                <p>
-                                    <?php echo $address->getBillingPhone() ?>
-                                </p>
-                            </div>
-                        </div>
-                        <div>
-                            <h4>Shipping Address</h4>
-                            <div class="address-details">
-                                <label>Address</label>
-                                <p>
-                                    <?php echo $address->getShippingAddress() ?>
-                                </p>
-                            </div>
-                            <div class="address-details">
-                                <label>City</label>
-                                <p>
-                                    <?php echo $address->getShippingCity() ?>
-                                </p>
-                            </div>
-                            <div class="address-details">
-                                <label>Country</label>
-                                <p>
-                                    <?php echo $address->getShippingCountry() ?>
-                                </p>
-                            </div>
-                            <div class="address-details">
-                                <label>Phone</label>
-                                <p>
-                                    <?php echo $address->getShippingPhone() ?>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
             <?php endforeach; ?>
         </div>
     </div>
@@ -112,9 +112,9 @@
                     <label for="billing_region">Billing Region:</label>
                     <select name="customer_address[billing_region]" id="billing_region">
                         <?php foreach ($this->getRegions() as $key => $val): ?>
-                                <option value='<?php echo $key ?>' class="billing_region">
-                                    <?php echo $val ?>
-                                </option>;
+                                        <option value='<?php echo $key ?>' class="billing_region">
+                                            <?php echo $val ?>
+                                        </option>;
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -122,19 +122,31 @@
                     <label for="shipping_region">Billing Region:</label>
                     <select name="customer_address[shipping_region]" id="shipping_region">
                         <?php foreach ($this->getRegions() as $key => $val): ?>
-                                <option value='<?php echo $key ?>' class="shipping_region">
-                                    <?php echo $val ?>
-                                </option>;
+                                        <option value='<?php echo $key ?>' class="shipping_region">
+                                            <?php echo $val ?>
+                                        </option>;
                         <?php endforeach; ?>
                     </select>
                 </div>
                 <div>
-                    <label for="billing_country">Billing Country:</label>
-                    <input type="text" name="customer_address[billing_country]" id="billing_country">
+                    <label for="shipping_region">Billing Country:</label>
+                    <select name="customer_address[shipping_region]" id="billing_country">
+                        <?php foreach ($this->getCountry() as $key => $val): ?>
+                                        <option value='<?php echo $key ?>' class="billing_country">
+                                            <?php echo $val ?>
+                                        </option>;
+                        <?php endforeach; ?>
+                    </select>
                 </div>
                 <div>
-                    <label for="shipping_country">Shipping Country:</label>
-                    <input type="text" name="customer_address[shipping_country]" id="shipping_country">
+                    <label for="shipping_region">Shipping Country:</label>
+                    <select name="customer_address[shipping_region]" id="shipping_country">
+                        <?php foreach ($this->getCountry() as $key => $val): ?>
+                                        <option value='<?php echo $key ?>' class="shipping_country">
+                                            <?php echo $val ?>
+                                        </option>;
+                        <?php endforeach; ?>
+                    </select>
                 </div>
                 <div>
                     <label for="billing_phone">Billing Phone:</label>

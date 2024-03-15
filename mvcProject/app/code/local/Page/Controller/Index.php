@@ -13,8 +13,7 @@ class Page_Controller_Index extends Core_Controller_Front_Action
             ->addCss('header.css')
             ->addCss('footer.css');
 
-
-        $banner = $layout->createBlock('core/template')
+        $banner = $layout->createBlock('banner/banner')
             ->setTemplate('banner/banner.phtml');
         $layout->getChild('content')
             ->addChild('banner', $banner);

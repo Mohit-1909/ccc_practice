@@ -5,7 +5,6 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Admin_Action
     protected $_allowedAction = [];
     public function formAction()
     {
-        // $this->includeCss();
         $layout = $this->getLayout();
         $layout->getChild('head')
             ->addCss('product/form.css')
@@ -28,6 +27,13 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Admin_Action
     {
         $data = $this->getRequest()->getParams('catalog_product');
         $imageFileData = $this->getRequest()->getFileData('image_link');
+        // $imageFileData = $_FILES['image_link']['name'];
+        // $tmp_name = $_FILES['image_link']['tmp_name'];
+
+        // $data['image_link'] = $imageFileData;
+        // echo "<pre>";
+        // print_r($imageFileData);
+        // die;
         $productFileImage = $imageFileData['name'];
 
         if (!empty ($productFileImage)) {
@@ -65,9 +71,14 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Admin_Action
 
         $this->setRedirect('admin/catalog_product/list');
     }
+    public function deleteAction()
+    {
+        $productId = $this->getRequest()->getParams('product_id');
+        Mage::getModel('catalog/product')
+            ->load($productId)->delete();
+    }
     public function listAction()
     {
-        // $this->includeCss();
         $layout = $this->getLayout();
         $layout->getChild('head')
             ->addCss('product/list.css');
@@ -77,12 +88,5 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Admin_Action
 
         $child->addChild('list', $productList);
         $layout->toHtml();
-    }
-    public function deleteAction()
-    {
-        $productId = $this->getRequest()->getParams('product_id');
-        Mage::getModel('catalog/product')
-            ->load($productId)
-            ->delete();
     }
 }

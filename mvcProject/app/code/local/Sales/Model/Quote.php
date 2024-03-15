@@ -12,7 +12,7 @@ class Sales_Model_Quote extends Core_Model_Abstract
         $quoteId = Mage::getSingleton('core/session')->get('quote_id', 0);
         if (!$quoteId) {
             $quote = Mage::getModel('sales/quote')
-                ->setData(['tax_percent' => 0, 'grand_total' => 0])
+                ->setData(['tax_percent' => 8, 'grand_total' => 0])
                 ->save();
             Mage::getSingleton('core/session')
                 ->set('quote_id', $quote->getId());
@@ -65,10 +65,7 @@ class Sales_Model_Quote extends Core_Model_Abstract
     }
     public function deleteProduct($itemId)
     {
-        $quoteId = Mage::getSingleton('core/session')
-            ->getId();
-        $this->load($quoteId);
-
+        $this->initQuote();
         if ($this->getId()) {
             Mage::getModel('sales/quote_item')->deleteItem($this, $itemId);
         }
@@ -89,8 +86,8 @@ class Sales_Model_Quote extends Core_Model_Abstract
     }
     public function convert()
     {
+        $this->initQuote();
         if ($this->getId()) {
-            echo 123;
             $orderId = Mage::getModel('sales/order')
                 ->setData($this->getData())
                 ->removeData('quote_id')

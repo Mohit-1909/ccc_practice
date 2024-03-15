@@ -8,7 +8,7 @@ var categoryId = '{$productData->getCategoryId()}';
 
 <div class="form">
     <h2>Product Form</h2>
-    <form method="POST" action="<?php echo $this->getUrl('admin/catalog_product/save') ?>">
+    <form method="POST" action="<?php echo $this->getUrl('admin/catalog_product/save') ?>" enctype="multipart/form-data">
         <div>
             <input type="hidden" value="<?php echo $productData->getProductId() ?>" name="catalog_product[product_id]">
         </div>
@@ -34,9 +34,9 @@ var categoryId = '{$productData->getCategoryId()}';
                 <label for="category">Category:</label>
                 <select name="catalog_product[category_id]" id="category">
                     <?php foreach ($this->getCategory() as $_category): ?>
-                            <option value=<?php echo $_category->getCategoryId() ?> class="category">
-                                <?php echo $_category->getCategoryName() ?>
-                            </option>;
+                                        <option value=<?php echo $_category->getCategoryId() ?> class="category">
+                                            <?php echo $_category->getCategoryName() ?>
+                                        </option>;
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -47,7 +47,7 @@ var categoryId = '{$productData->getCategoryId()}';
             </div>
             <div>
                 <label for="image_link">Image Link:</label>
-                <input type="file" value="<?php echo $productData->getImageLink() ?>" name="catalog_product[image_link]"
+                <input type="file" value="<?php echo $productData->getImageLink() ?>" name="image_link"
                     id="image_link">
             </div>
             <div>
