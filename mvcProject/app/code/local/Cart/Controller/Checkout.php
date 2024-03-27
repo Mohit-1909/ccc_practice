@@ -6,27 +6,43 @@ class Cart_Controller_Checkout extends Core_Controller_Front_Action
     public function indexAction()
     {
         $quoteId = Mage::getSingleton('core/session')->get('quote_id');
-        if ($quoteId) {
-            $layout = $this->getLayout();
-            $content = $layout->getChild('content');
-            $layout->getChild('head')->addCss('customer/address/form.css');
-            $addressBlock = Mage::getBlock('customer/address');
+        $this->checkDataIsNull([$quoteId], '');
 
-            $content->addChild('form', $addressBlock);
-            $layout->toHtml();
-        } else {
-            $this->setRedirect('catalog/product/view');
-        }
+        $layout = $this->getLayout();
+        $layout->getChild('head')
+            ->addCss('customer/address/quote/form.css')
+            ->addJs('customer/address/form.js');
+        $content = $layout->getChild('content');
+
+        $addressForm = Mage::getBlock('customer/quote_address');
+        $content->addChild('form', $addressForm);
+
+        $layout->toHtml();
     }
     public function methodAction()
     {
         $layout = $this->getLayout();
-        $head = $layout->getChild('head');
-        $head->addCss('cart/checkout/method.css');
-
-        $methodBlock = Mage::getBlock('cart/checkout_method');
+        $layout->getChild('head')
+            ->addCss('cart/checkout/method.css');
+        // ->addJs('cart/checkout/method.js');
         $content = $layout->getChild('content');
-        $content->addChild('form', $methodBlock);
+
+        $methodForm = Mage::getBlock('cart/checkout_method');
+        $content->addChild('method', $methodForm);
+
+        $layout->toHtml();
+    }
+    public function successAction()
+    {
+        $layout = $this->getLayout();
+        $layout->getChild('head')
+            ->addCss('cart/checkout/success.css');
+        // ->addJs('cart/checkout/success.js');
+        $content = $layout->getChild('content');
+
+        $successPage = Mage::getBlock('cart/checkout_success');
+        $content->addChild('method', $successPage);
+
         $layout->toHtml();
     }
 }

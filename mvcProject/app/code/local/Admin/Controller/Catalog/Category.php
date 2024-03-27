@@ -17,7 +17,6 @@ class Admin_Controller_Catalog_Category extends Core_Controller_Admin_Action
     }
     public function saveAction()
     {
-        // echo "<pre>";
         $data = $this->getRequest()->getParams('catalog_category');
         Mage::getModel('catalog/category')
             ->setData($data)

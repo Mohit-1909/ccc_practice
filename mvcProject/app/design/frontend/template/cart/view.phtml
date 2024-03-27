@@ -1,17 +1,13 @@
-<?php
-$quoteItems = $this->getQuoteItems();
-// print_r(count($quoteItems));
-?>
-
 <div class="cart">
     <h1>Shopping Cart</h1>
-    <?php if (count($quoteItems) > 0): ?>
+    <?php if (count($this->getQuoteItems()) > 0): ?>
         <div class="cart-items">
-            <?php foreach ($quoteItems as $quoteItem): ?>
+            <?php foreach ($this->getQuoteItems() as $quoteItem): ?>
                 <form method="post">
                     <input type="hidden" name="item_id" value="<?php echo $quoteItem->getItemId() ?>">
                     <input type="hidden" name="sales_quote[product_id]" value="<?php echo $quoteItem->getProductId() ?>">
                     <input type="hidden" name="sales_quote[item_id]" value="<?php echo $quoteItem->getItemId() ?>">
+
                     <div class="cart-item">
                         <img src=<?php echo $this->getUrl('media/product/sample.jpg') ?> alt="Product Img">
                         <div class="item-details">
@@ -21,33 +17,38 @@ $quoteItems = $this->getQuoteItems();
                             <div>
                                 <div>
                                     <label for="price">Price:</label>
-                                    <input type="text" value="<?php echo "&#8377;" . $quoteItem->getPrice() ?>" id="price" disabled>
+                                    <input type="text" value="<?php echo "&#8377;" . $quoteItem->getPrice() ?>" id="price"
+                                        disabled>
                                 </div>
                                 <div>
                                     <label for="qty">Quantity:</label>
-                                    <input type="number" min='1' name="sales_quote[qty]" value="<?php echo $quoteItem->getQty() ?>" id="qty">
+                                    <input type="number" name="sales_quote[qty]" value="<?php echo $quoteItem->getQty() ?>"
+                                        id="qty" required min="1" max="<?php echo $quoteItem->getProduct()->getInventory() ?>">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="item-actions">
-                        <button formaction="<?php echo $this->getUrl('sales/quote/delete') ?>" class="delete-btn" type="submit">Delete Item</button>
-                        <button formaction="<?php echo $this->getUrl('sales/quote/add') ?>" class="update-btn" type="submit">Update
+                        <button formaction="<?php echo $this->getUrl('sales/quote/delete') ?>" class="delete-btn"
+                            type="submit">Delete Item</button>
+                        <button formaction="<?php echo $this->getUrl('sales/quote/add') ?>" class="update-btn"
+                            type="submit">Update
                             Item</button>
                     </div>
                 </form>
-                <?php endforeach; ?>
-            </div>
-            <hr>
-            <div class="cart-summary">
-                <p>
-                    <strong>
-                        <?php echo "Total Price: &#8377;" . $this->getQuote()->getGrandTotal() ?>
-                    </strong>
-                </p>
-                <a class="checkout-btn" href="<?php echo $this->getUrl('cart/checkout/index') ?>">Checkout</a>
-            </div>
+            <?php endforeach; ?>
+        </div>
+        <hr>
+        <div class="cart-summary">
+            <p>
+                <strong>
+                    <?php echo "Total Price: &#8377;" . $this->getQuote()->getGrandTotal() ?>
+                </strong>
+            </p>
+            <a class="checkout-btn" href="<?php echo $this->getUrl('cart/checkout/index') ?>">Checkout</a>
+        </div>
     <?php else: ?>
-        <p class='empty-cart'>Cart is Empty!</p>
+        <p class="warning-p">Your cart is empty, please add product</p>
     <?php endif; ?>
+
 </div>

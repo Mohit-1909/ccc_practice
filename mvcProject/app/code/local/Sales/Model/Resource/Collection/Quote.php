@@ -1,6 +1,5 @@
-<?php 
+<?php
 
-class Quote_Model_Resource_Collection_Quote extends Core_Model_Resource_Collection_Abstract
+class Sales_Model_Resource_Collection_Quote extends Core_Model_Resource_Collection_Abstract
 {
-    
 }

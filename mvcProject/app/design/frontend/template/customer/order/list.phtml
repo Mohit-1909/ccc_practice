@@ -1,0 +1,44 @@
+<div class="list">
+    <?php if ($this->getOrderList()): ?>
+        <h2>My Orders</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Order Number</th>
+                    <th>Total (in Rs.)</th>
+                    <th>Tax (in %)</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($this->getOrderList() as $order): ?>
+                    <tr>
+                        <td>
+                            <?php echo $order->getOrderNumber() ?>
+                        </td>
+                        <td>
+                            <?php echo "&#8377;" . $order->getGrandTotal() ?>
+                        </td>
+                        <td>
+                            <?php echo $order->getTaxPercent() ?>
+                        </td>
+                        <td class="order-status" status="<?php echo $order->getStatus() ?>">
+                            <b>
+                                <?php echo ucfirst($order->getStatus()) ?>
+                            </b>
+                        </td>
+                        <td>
+                            <a href="<?php echo $this->getUrl("customer/order/view?order_id={$order->getId()}") ?>">
+                                View
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php else: ?>
+        <p class="warning-p">No orders found</p>
+        <a class="home-button" href="<?php echo $this->getUrl('') ?>">Go To Home</a>
+    <?php endif; ?>
+</div>

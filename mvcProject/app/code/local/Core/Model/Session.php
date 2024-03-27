@@ -3,7 +3,7 @@ class Core_Model_Session
 {
     public function __construct()
     {
-        if (!isset($_SESSION)) {
+        if (!isset ($_SESSION)) {
             session_start();
         }
     }
@@ -26,19 +26,20 @@ class Core_Model_Session
     public function set($key, $value)
     {
         $_SESSION[$key] = $value;
-        session_write_close();
         return $this;
     }
     public function remove($key)
     {
-        if (isset($_SESSION[$key])) {
+        if (isset ($_SESSION[$key])) {
             unset($_SESSION[$key]);
         }
+    }
+    public function destroy()
+    {
+        session_destroy();
     }
     public function __destruct()
     {
 
     }
-
 }
-?>

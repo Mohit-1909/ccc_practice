@@ -13,6 +13,8 @@ class Catalog_Block_Admin_Product_Form extends Core_Block_Template
     }
     public function getCategory()
     {
-        return Mage::getModel('catalog/category')->getCollection()->getData();
+        return Mage::getModel('catalog/category')
+            ->getCollection()
+            ->getData();
     }
 }

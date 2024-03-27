@@ -1,11 +1,13 @@
 <?php
 
-class Cart_Block_Checkout_Method extends Core_Block_Template{
+class Cart_Block_Checkout_Method extends Core_Block_Template
+{
     public function __construct()
     {
         $this->setTemplate('cart/checkout/method.phtml');
     }
-    public function getPaymentMethods(){
+    public function getPaymentMethods()
+    {
         return [
             'upi' => 'UPI',
             'card' => 'Credit/Debit Card',
@@ -14,15 +16,17 @@ class Cart_Block_Checkout_Method extends Core_Block_Template{
             'paylater' => 'Pay Later'
         ];
     }
-    public function getShippingMethods(){
+    public function getShippingMethods()
+    {
         return [
             'same_day' => 'Same Day',
             'at_door_step' => 'At Door Step',
             'env_friendly' => 'Environment Friendly',
-            'normal' => 'Normal' 
+            'normal' => 'Normal'
         ];
     }
-    public function getQuoteId(){
+    public function getQuoteId()
+    {
         return Mage::getSingleton('core/session')->get('quote_id');
     }
 }

@@ -1,13 +1,20 @@
 <?php
 class Customer_Controller_Address extends Core_Controller_Front_Action
 {
-    public function newAction()
+    protected $_allowedAction = [];
+    public function formAction()
     {
-        echo "Address New Action";
-    }
-    public function listAction()
-    {
-        echo "Address List Action";
+        $layout = $this->getLayout();
+        $layout->getChild('head')
+            ->addCss('customer/address/form.css')
+            ->addJs('customer/address/form.js');
+
+        $content = $layout->getChild("content");
+
+        $addressForm = Mage::getBlock('customer/address');
+        $content->addChild('form', $addressForm);
+
+        $layout->toHtml();
     }
     public function saveAction()
     {
@@ -18,7 +25,11 @@ class Customer_Controller_Address extends Core_Controller_Front_Action
             ->removeData('email')
             ->removeData('quote_id')
             ->save();
-        $this->setRedirect('cart/checkout');
+        $this->setRedirect('customer/address/list');
+    }
+    public function listAction()
+    {
+        echo "List address";
     }
     public function deleteAction()
     {

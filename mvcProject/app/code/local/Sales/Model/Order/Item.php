@@ -13,9 +13,21 @@ class Sales_Model_Order_Item extends Core_Model_Abstract
     }
     public function _beforeSave()
     {
-        if ($this->getProduct()) {
+        if ($this->getProductId()) {
             $this->addData('product_name', $this->getProduct()->getName());
             $this->addData('product_color', $this->getProduct()->getColor());
         }
+    }
+    public function addItem(Sales_Model_Order $order, $quoteItem)
+    {
+        $this->setData($quoteItem)
+            ->removeData('item_id')
+            ->removeData('quote_id')
+            ->addData('order_id', $order->getId())
+            ->save();
+        $product = $this->getProduct();
+        $inventory = (int) $product->getInventory() - (int) $this->getQty();
+        $product->addData('inventory', $inventory)->save();
+        return $this;
     }
 }

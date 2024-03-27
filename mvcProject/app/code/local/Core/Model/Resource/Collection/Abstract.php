@@ -6,7 +6,6 @@ class Core_Model_Resource_Collection_Abstract
     public function __construct()
     {
     }
-
     public function setResource($resource)
     {
         $this->_resource = $resource;
@@ -27,11 +26,51 @@ class Core_Model_Resource_Collection_Abstract
         $this->_select['WHERE'][$field][] = $value;
         return $this;
     }
+    public function addLimit($limit)
+    {
+        $this->_select['LIMIT'] = $limit;
+        return $this;
+    }
+    public function addOffset($offset)
+    {
+        $this->_select['OFFSET'] = $offset;
+        return $this;
+    }
+    public function addCount($column, $newColumnName)
+    {
+        $this->_select["COUNT"] = "Count($column) AS " . $newColumnName;
+        return $this;
+    }
+    public function addSum($column, $newColumnName)
+    {
+        $this->_select["SUM"] = "SUM($column) AS " . $newColumnName;
+        return $this;
+    }
 
+    public function addGroupBy($column)
+    {
+        $this->_select['GROUP_BY'][] = $column;
+        return $this;
+    }
+    public function addOrderBy($column, $type = 'ASC')
+    {
+        $this->_select['ORDER_BY'][] = "{$column} {$type}";
+        return $this;
+    }
     public function load()
     {
-        $sql = "SELECT * FROM {$this->_select['FROM']}";
-        if (isset($this->_select["WHERE"])) {
+        $sql = "SELECT *";
+
+        if (isset ($this->_select["SUM"])) {
+            $sql .= ",{$this->_select['SUM']}";
+        }
+        if (isset ($this->_select["COUNT"])) {
+            $sql .= ",{$this->_select['COUNT']}";
+        }
+
+        $sql .= " FROM {$this->_select['FROM']}";
+
+        if (isset ($this->_select["WHERE"])) {
             $whereCondition = [];
             foreach ($this->_select["WHERE"] as $column => $value) {
                 foreach ($value as $_value) {
@@ -55,15 +94,35 @@ class Core_Model_Resource_Collection_Abstract
                             case 'like':
                                 $whereCondition[] = "{$column} LIKE '{$_v}'";
                                 break;
+                            case 'is_null':
+                                $whereCondition[] = "{$column} IS NULL";
+                                break;
                         }
                     }
                 }
             }
             $sql .= " WHERE " . implode(" AND ", $whereCondition);
         }
+
+        if (isset ($this->_select['GROUP_BY'])) {
+            $groupBy = implode(", ", array_values($this->_select['GROUP_BY']));
+            $sql .= " GROUP BY '{$groupBy}'";
+        }
+
+        if (isset ($this->_select['ORDER_BY'])) {
+            $orderBy = implode(", ", array_values($this->_select['ORDER_BY']));
+            $sql .= " ORDER BY {$orderBy}";
+        }
+
+        if (isset ($this->_select['LIMIT'])) {
+            $sql .= " LIMIT {$this->_select['LIMIT']}";
+        }
+
+        if (isset ($this->_select['OFFSET'])) {
+            $sql .= " OFFSET {$this->_select['OFFSET']}";
+        }
         $result = $this->_resource->getAdapter()->fetchAll($sql);
         foreach ($result as $row) {
-            // $this->_data[] = Mage::getModel('catalog/product')->setData($row);
             $modelObj = new $this->_model;
             $this->_data[] = $modelObj->setData($row);
         }
@@ -76,6 +135,6 @@ class Core_Model_Resource_Collection_Abstract
     public function getFirstItem()
     {
         $this->load();
-        return isset($this->_data[0]) ? $this->_data[0] : null;
+        return isset ($this->_data[0]) ? $this->_data[0] : null;
     }
 }

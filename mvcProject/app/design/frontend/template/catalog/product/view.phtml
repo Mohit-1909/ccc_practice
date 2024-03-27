@@ -1,39 +1,28 @@
-<div class="prodcard">
-    <?php foreach ($this->getItem() as $product) { ?>
-    <div class="card">
-        <img src="<?php echo $this->getImagePath() . $product->getImageLink();
-        ; ?>" alt="Product Image">
-        <table>
-            <tr>
-                <th>Name</th>
-                <td>
-                    <?php echo $product->getName(); ?>
-                </td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>
-                    <?php echo $product->getPrice(); ?>
-                </td>
-            </tr>
-            <form method="POST" action="<?php echo $this->getUrl('sales/quote/add') ?>">
-                <td>
-                    <div class="form">
-                        <div class="row">
-                            <input type="hidden" name="sales_quote[product_id]" value="<?php echo $product->getProductId(); ?>">
-                        </div>
-                        <div class="row">
-                            <label for="quantity">Quantity : </label>
-                            <input type="text" min="1" value="1" name="sales_quote[qty]" id="quantity">
-                        </div>
-                </td>
-                <td>
-                    <div class="row">
-                        <input type="submit" value="AddToCart">
-                    </div>
-                </td>
-            </form>
-        </table>
+<?php
+$_product = $this->getSingleProduct();
+?>
+<form action="<?php echo $this->getUrl('sales/quote/add') ?>" method="post">
+    <div class="product-page">
+        <div class="product-image">
+            <img src="product.jpg" alt="Product">
+        </div>
+        <div class="product-info">
+            <h1>
+                <?php echo $_product->getName() ?>
+            </h1>
+            <p>
+                <?php echo $_product->getDescription() ?>
+            </p>
+            <p>
+                <?php echo "&#8377;" . $_product->getPrice() ?>
+            </p>
+            <div class="quantity">
+                <label for="quantity">Quantity:</label>
+                <input type="hidden" name="sales_quote[product_id]" value="<?php echo $_product->getId() ?>">
+                <input type="number" id="quantity" name="sales_quote[qty]" max="<?php echo $_product->getInventory() ?>"
+                    min="1" value="1">
+            </div>
+            <input type="submit" name="submit" value="Add to Cart" class="add-to-cart">
+        </div>
     </div>
-    <?php } ?>
-</div>
+</form>
